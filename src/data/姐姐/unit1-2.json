@@ -1,0 +1,107 @@
+{
+  "name": "七下英语(新教材)早背晚默小纸条第2 天",
+  "description": "Unit 1",
+  "type": "unit",
+  "words": [
+    {
+      "name": "Thai",
+      "description": "adj.泰国的;泰国人的n.泰国人;泰语"
+    },
+    {
+      "name": "kill",
+      "description": "v.杀死;弄死"
+    },
+    {
+      "name": "made of",
+      "description": "由……制成的"
+    },
+    {
+      "name": "pick up",
+      "description": "拿起;举起"
+    },
+    {
+      "name": "ivory",
+      "description": "n.象牙"
+    },
+    {
+      "name": "carry",
+      "description": "v.拿;提"
+    },
+    {
+      "name": "friendly",
+      "description": "adj.友好的"
+    },
+    {
+      "name": "playful",
+      "description": "adj.爱嬉戏的;爱玩的"
+    },
+    {
+      "name": "quite",
+      "description": "adv.相当;完全"
+    },
+    {
+      "name": "swimmer",
+      "description": "n.游泳者"
+    },
+    {
+      "name": "not...at all",
+      "description": "一点也不;完全不"
+    },
+    {
+      "name": "one another",
+      "description": "互相"
+    },
+    {
+      "name": "fur",
+      "description": "n.(动物浓厚的)软毛"
+    },
+    {
+      "name": "look after",
+      "description": "照顾"
+    },
+    {
+      "name": "blind",
+      "description": "adj.瞎的;失明的"
+    },
+    {
+      "name": "danger",
+      "description": "n.危险"
+    },
+    {
+      "name": "hearing",
+      "description": "n.听力;听觉"
+    },
+    {
+      "name": "in danger",
+      "description": "处于危险之中"
+    },
+    {
+      "name": "Antarctica",
+      "description": "南极洲"
+    },
+    {
+      "name": "forest",
+      "description": "n.森林"
+    },
+    {
+      "name": "Africa",
+      "description": "非洲"
+    },
+    {
+      "name": "cut down",
+      "description": "砍伐;减少"
+    },
+    {
+      "name": "Malee",
+      "description": "马莉"
+    },
+    {
+      "name": "too many",
+      "description": "太多"
+    },
+    {
+      "name": "Thailand",
+      "description": "泰国"
+    }
+  ]
+}

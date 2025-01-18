@@ -1,0 +1,15 @@
+{
+  "name": "弟弟的第一单元",
+  "description": "基础单词",
+  "type": "unit",
+  "words": [
+    {
+      "name": "apple",
+      "description": "苹果"
+    },
+    {
+      "name": "egg",
+      "description": "鸡蛋"
+    }
+  ]
+}

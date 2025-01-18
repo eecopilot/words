@@ -1,0 +1,95 @@
+{
+  "name": "七下英语(新教材)早背晚默小纸条第1 天",
+  "description": "Unit 1",
+  "type": "unit",
+  "words": [
+    {
+      "name": "fox",
+      "description": "n.狐狸"
+    },
+    {
+      "name": "guess",
+      "description": "v.猜测;估计"
+    },
+    {
+      "name": "giraffe",
+      "description": "n.长颈鹿"
+    },
+    {
+      "name": "shark",
+      "description": "n.鲨鱼"
+    },
+    {
+      "name": "eagle",
+      "description": "n.雕;鹰"
+    },
+    {
+      "name": "whale",
+      "description": "n.鲸"
+    },
+    {
+      "name": "wolf",
+      "description": "n.(pl.wolves)狼"
+    },
+    {
+      "name": "huge",
+      "description": "adj.巨大的;极多的"
+    },
+    {
+      "name": "penguin",
+      "description": "n.企鹅"
+    },
+    {
+      "name": "dangerous",
+      "description": "adj.危险的;有危害的"
+    },
+    {
+      "name": "care",
+      "description": "n.照顾;护理v.关心;在乎"
+    },
+    {
+      "name": "save",
+      "description": "v.救;储蓄;保存"
+    },
+    {
+      "name": "take care of",
+      "description": "照顾;处理"
+    },
+    {
+      "name": "luck",
+      "description": "n.幸运;运气"
+    },
+    {
+      "name": "sandwich",
+      "description": "n.三明治"
+    },
+    {
+      "name": "trunk",
+      "description": "n.象鼻"
+    },
+    {
+      "name": "snake",
+      "description": "n.蛇"
+    },
+    {
+      "name": "pick",
+      "description": "v.捡;摘"
+    },
+    {
+      "name": "scary",
+      "description": "adj.吓人的;恐怖的"
+    },
+    {
+      "name": "culture",
+      "description": "n.文化;文明"
+    },
+    {
+      "name": "neck",
+      "description": "n.脖子"
+    },
+    {
+      "name": "however",
+      "description": "adv.然而;不过"
+    }
+  ]
+}
