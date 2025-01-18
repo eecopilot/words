@@ -229,14 +229,24 @@ const speakWord = async () => {
   try {
     isSpeaking.value = true;
     const word = currentWord.value.name;
-    const url = await getTTSAudio(word);
-    const audio = new Audio(url);
 
-    audio.onended = () => {
+    // 获取已加载好的音频元素
+    const audioElement = await getTTSAudio(word);
+
+    // 确保只有一个 onended 处理器
+    audioElement.onended = () => {
       isSpeaking.value = false;
+      audioElement.onended = null;
     };
 
-    await audio.play();
+    // 在 iOS 上，需要用户交互才能播放音频
+    try {
+      await audioElement.play();
+    } catch (playError) {
+      console.error('播放错误:', playError);
+      isSpeaking.value = false;
+      ElMessage.error('播放失败，请重试');
+    }
   } catch (error) {
     console.error('朗读错误:', error);
     isSpeaking.value = false;
