@@ -1,5 +1,19 @@
 <template>
   <div class="app-container">
+    <audio
+      id="tts-audio"
+      playsinline
+      webkit-playsinline
+      preload="auto"
+      style="
+        position: fixed;
+        top: -100px;
+        left: -100px;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        pointer-events: none;
+      "></audio>
     <!-- 使用抽屉组件 -->
     <WrongWordsDrawer
       ref="wrongWordsDrawerRef"
@@ -458,6 +472,7 @@ const wrongWordsDrawerRef = ref();
   background: white;
   border-radius: 8px;
   padding: 16px;
+  margin-bottom: 80px;
   text-align: center;
 }
 

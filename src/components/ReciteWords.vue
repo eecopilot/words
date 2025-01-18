@@ -258,7 +258,6 @@ const speakWord = async () => {
 <style scoped>
 /* PC端基础样式 */
 .recite-container {
-  max-width: 800px;
   padding: 40px 0;
 }
 
@@ -286,6 +285,7 @@ const speakWord = async () => {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 20px;
   gap: 10px;
 }
 
@@ -357,8 +357,6 @@ const speakWord = async () => {
   background: white;
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
   gap: 20px;
 }
 
