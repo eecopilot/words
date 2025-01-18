@@ -24,7 +24,15 @@
         </div>
       </div>
 
-      <div class="word-meaning">{{ currentWord.description }}</div>
+      <div class="word-meaning">
+        {{ currentWord.description }}
+        <el-icon
+          class="speak-icon"
+          :class="{ speaking: isSpeaking }"
+          @click="speakWord">
+          <Microphone />
+        </el-icon>
+      </div>
 
       <el-input
         v-model="userInput"
@@ -104,8 +112,9 @@
 import { ref, computed } from 'vue';
 import { ElMessage } from 'element-plus';
 import { wrongWordsManager } from '../utils/wrongWords.ts';
+import { getTTSAudio } from '../utils/tts';
 // 按需导入图标
-import { ArrowLeft } from '@element-plus/icons-vue';
+import { ArrowLeft, Microphone } from '@element-plus/icons-vue';
 
 const props = defineProps<{
   words: {
@@ -210,10 +219,29 @@ const nextWord = () => {
   showResult.value = false;
 };
 
-// 完成背诵
-const finishReciting = () => {
-  emit('updateWrongWords');
-  showResult.value = true;
+// 添加朗读状态
+const isSpeaking = ref(false);
+
+// 添加朗读函数
+const speakWord = async () => {
+  if (isSpeaking.value) return;
+
+  try {
+    isSpeaking.value = true;
+    const word = currentWord.value.name;
+    const url = await getTTSAudio(word);
+    const audio = new Audio(url);
+
+    audio.onended = () => {
+      isSpeaking.value = false;
+    };
+
+    await audio.play();
+  } catch (error) {
+    console.error('朗读错误:', error);
+    isSpeaking.value = false;
+    ElMessage.error('朗读失败，请稍后重试');
+  }
 };
 </script>
 
@@ -244,10 +272,43 @@ const finishReciting = () => {
 }
 
 .word-meaning {
-  font-size: 32px;
-  margin: 40px 0;
-  text-align: center;
-  color: #333;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.speak-icon {
+  font-size: 36px;
+  color: #409eff;
+  cursor: pointer;
+  padding: 12px;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  background-color: #ecf5ff;
+}
+
+.speak-icon:hover {
+  transform: scale(1.1);
+  background-color: #d9ecff;
+}
+
+.speak-icon.speaking {
+  animation: pulse 1.5s infinite;
+  background-color: #d9ecff;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .result-message {
