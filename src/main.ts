@@ -1,7 +1,5 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import ElementPlus from 'element-plus';
-import 'element-plus/dist/index.css';
 import './style.css';
 
 // 移除全局图标导入
@@ -24,12 +22,8 @@ async function loadWordUnits() {
 // 创建应用并挂载
 const initApp = async () => {
   const app = createApp(App);
-
-  app.use(ElementPlus);
-
   const units = await loadWordUnits();
   app.provide('wordUnits', units);
-
   app.mount('#app');
 };
 
