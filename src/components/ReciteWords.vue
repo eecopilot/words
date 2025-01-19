@@ -186,23 +186,38 @@ const checkAnswer = () => {
     userInput.value.trim().toLowerCase() ===
     currentWord.value.name.toLowerCase();
 
+  // 检查当前单词是否在错误单词本中
+  const isWrongWordMode = currentWord.value.type === 'wrong-words';
+
   if (!isCorrect.value) {
     wrongAnswers.value.add(currentIndex.value);
-    // 添加到错误单词本，确保只在非错误单词本模式下添加
-    if (props.mode !== 'wrong-words') {
+    if (isWrongWordMode) {
+      // 如果在错误单词本中答错，更新计数
+      wrongWordsManager.updateWordCorrectCount(
+        currentWord.value.owner,
+        currentWord.value,
+        false
+      );
+    } else {
+      // 如果不是错误单词本中的单词，添加到错误单词本
       wrongWordsManager.addWrongWord(
-        {
-          name: currentWord.value.name,
-          description: currentWord.value.description,
-          owner: currentWord.value.owner,
-        },
+        currentWord.value,
         currentWord.value.owner
       );
-      // 发出更新错误单词列表的事件
-      emit('updateWrongWords');
     }
-  } else {
-    // 保存进度到 localStorage
+    emit('updateWrongWords');
+  } else if (isWrongWordMode) {
+    // 如果在错误单词本中答对
+    wrongWordsManager.updateWordCorrectCount(
+      currentWord.value.owner,
+      currentWord.value,
+      true
+    );
+    emit('updateWrongWords');
+  }
+
+  // 保存进度到 localStorage
+  if (isCorrect.value) {
     const progress = JSON.parse(localStorage.getItem('wordProgress') || '{}');
     const wordKey = `${currentWord.value.owner}-${currentWord.value.name}`;
     progress[wordKey] = (progress[wordKey] || 0) + 1;
@@ -251,6 +266,36 @@ const speakWord = async () => {
     console.error('朗读错误:', error);
     isSpeaking.value = false;
     ElMessage.error('朗读失败，请稍后重试');
+  }
+};
+
+// 处理答案
+const handleAnswer = async (isCorrect: boolean) => {
+  if (isAnswered.value) return;
+
+  isAnswered.value = true;
+  const word = currentWord.value;
+
+  // 更新错误单词本
+  if (word.owner) {
+    // 无论是否在错误单词本中，都更新状态
+    wrongWordsManager.updateWordCorrectCount(word.owner, word, isCorrect);
+    emit('updateWrongWords');
+  } else if (!isCorrect) {
+    // 如果不是错误单词本中的单词，且答错了，添加到错误单词本
+    wrongWordsManager.addWrongWord(word.owner, word);
+    emit('updateWrongWords');
+  }
+
+  // 更新进度
+  updateProgress(word.name, isCorrect);
+
+  // 显示答案
+  showAnswer.value = true;
+
+  // 如果答对了，自动朗读
+  if (isCorrect) {
+    await speakWord();
   }
 };
 </script>

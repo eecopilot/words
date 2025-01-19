@@ -207,9 +207,12 @@ const currentUnits = computed(() => {
   if (wrongWords.length > 0) {
     units.push({
       name: '错误单词本',
-      description: '收集做错的单词，答对5次后移除',
+      description: '收集做错的单词，答对3次后移除',
       type: 'wrong-words',
-      words: wrongWords,
+      words: wrongWords.map((word) => ({
+        ...word,
+        type: 'wrong-words', // 添加类型标记
+      })),
       owner: currentFolder.value,
     });
   }

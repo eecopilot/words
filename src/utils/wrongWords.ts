@@ -1,81 +1,106 @@
-interface WrongWord {
-  name: string;
-  description: string;
-  correctCount: number;
-  owner: string;
-}
+// 错误单词管理器
+class WrongWordsManager {
+  private storageKey = 'recite-wrong-words';
 
-interface WrongWordsStorage {
-  [owner: string]: WrongWord[];
-}
+  constructor() {
+    // 迁移旧数据
+    this.migrateOldData();
+  }
 
-const STORAGE_KEY = 'recite-wrong-words';
+  private migrateOldData() {
+    const oldData = localStorage.getItem('wrongWords');
+    if (oldData) {
+      try {
+        const oldWrongWords = JSON.parse(oldData);
+        const currentData = this.getWrongWordsMap();
+        // 合并数据
+        const mergedData = { ...currentData, ...oldWrongWords };
+        this.saveWrongWordsMap(mergedData);
+        // 删除旧数据
+        localStorage.removeItem('wrongWords');
+      } catch (error) {
+        console.error('迁移旧数据失败:', error);
+      }
+    }
+  }
 
-export const wrongWordsManager = {
-  // 获取某个用户的错误单词
-  getWrongWords(owner: string): WrongWord[] {
-    const storage = localStorage.getItem(STORAGE_KEY);
-    if (!storage) return [];
-    const allWrongWords = JSON.parse(storage) as WrongWordsStorage;
-    return allWrongWords[owner] || [];
-  },
+  // 获取错误单词列表
+  getWrongWords(owner: string): any[] {
+    const wrongWordsMap = this.getWrongWordsMap();
+    return wrongWordsMap[owner] || [];
+  }
 
   // 添加错误单词
-  addWrongWord(
-    word: { name: string; description: string; owner: string },
-    owner: string
-  ) {
-    const storage = localStorage.getItem(STORAGE_KEY);
-    const allWrongWords: WrongWordsStorage = storage ? JSON.parse(storage) : {};
-
-    if (!allWrongWords[owner]) {
-      allWrongWords[owner] = [];
+  addWrongWord(word: any, owner: string) {
+    const wrongWordsMap = this.getWrongWordsMap();
+    if (!wrongWordsMap[owner]) {
+      wrongWordsMap[owner] = [];
     }
 
-    // 检查是否已存在
-    const existingWord = allWrongWords[owner].find((w) => w.name === word.name);
-    if (!existingWord) {
-      allWrongWords[owner].push({
-        name: word.name,
-        description: word.description,
-        correctCount: 0,
-        owner,
-      });
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(allWrongWords));
+    // 检查单词是否已存在
+    const existingWordIndex = wrongWordsMap[owner].findIndex(
+      (w: any) => w.name === word.name
+    );
+
+    if (existingWordIndex === -1) {
+      // 如果单词不存在，添加新单词，初始化 correctCount 为 0
+      wrongWordsMap[owner].push({ ...word, correctCount: 0 });
+    } else {
+      // 如果单词已存在，将 correctCount 重置为 0
+      wrongWordsMap[owner][existingWordIndex].correctCount = 0;
     }
-  },
 
-  // 更新单词正确次数
-  updateWordCorrectCount(word: WrongWord, owner: string) {
-    const storage = localStorage.getItem(STORAGE_KEY);
-    if (!storage) return;
+    this.saveWrongWordsMap(wrongWordsMap);
+  }
 
-    const allWrongWords = JSON.parse(storage) as WrongWordsStorage;
-    if (!allWrongWords[owner]) return;
+  // 更新单词的正确次数
+  updateWordCorrectCount(owner: string, word: any, isCorrect: boolean) {
+    const wrongWordsMap = this.getWrongWordsMap();
+    if (!wrongWordsMap[owner]) return;
 
-    const wordIndex = allWrongWords[owner].findIndex(
-      (w) => w.name === word.name
+    const wordIndex = wrongWordsMap[owner].findIndex(
+      (w: any) => w.name === word.name
     );
 
     if (wordIndex !== -1) {
-      allWrongWords[owner][wordIndex].correctCount++;
+      if (isCorrect) {
+        // 答对时增加计数
+        wrongWordsMap[owner][wordIndex].correctCount =
+          (wrongWordsMap[owner][wordIndex].correctCount || 0) + 1;
 
-      // 如果答对5次，则移除该单词
-      if (allWrongWords[owner][wordIndex].correctCount >= 5) {
-        allWrongWords[owner].splice(wordIndex, 1);
+        // 如果达到3次正确，从列表中移除
+        if (wrongWordsMap[owner][wordIndex].correctCount >= 3) {
+          wrongWordsMap[owner].splice(wordIndex, 1);
+        }
+      } else {
+        // 答错时减少计数，但不低于0
+        wrongWordsMap[owner][wordIndex].correctCount = Math.max(
+          (wrongWordsMap[owner][wordIndex].correctCount || 0) - 1,
+          0
+        );
       }
 
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(allWrongWords));
+      this.saveWrongWordsMap(wrongWordsMap);
     }
-  },
+  }
 
-  // 添加清空指定用户的错误单词方法
+  // 清空某个所有者的错误单词
   clearWrongWords(owner: string) {
-    const storage = localStorage.getItem(STORAGE_KEY);
-    if (!storage) return;
+    const wrongWordsMap = this.getWrongWordsMap();
+    wrongWordsMap[owner] = [];
+    this.saveWrongWordsMap(wrongWordsMap);
+  }
 
-    const allWrongWords = JSON.parse(storage) as WrongWordsStorage;
-    allWrongWords[owner] = [];
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(allWrongWords));
-  },
-};
+  // 获取错误单词映射表
+  private getWrongWordsMap(): { [key: string]: any[] } {
+    const wrongWordsJson = localStorage.getItem(this.storageKey);
+    return wrongWordsJson ? JSON.parse(wrongWordsJson) : {};
+  }
+
+  // 保存错误单词映射表
+  private saveWrongWordsMap(wrongWordsMap: { [key: string]: any[] }) {
+    localStorage.setItem(this.storageKey, JSON.stringify(wrongWordsMap));
+  }
+}
+
+export const wrongWordsManager = new WrongWordsManager();
