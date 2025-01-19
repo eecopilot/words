@@ -68,22 +68,14 @@
           <p>{{ unit.description }}</p>
           <div class="word-count">单词数量: {{ unit.words.length }}</div>
         </div>
-      </div>
-
-      <!-- 显示选中的单元数量和开始背诵按钮 -->
-      <div
-        v-if="selectedUnits.length"
-        class="selected-info">
-        <span
-          >已选择 {{ selectedUnits.length }} 个单元， 共
-          {{ totalWords }} 个单词</span
-        >
-        <el-button
-          type="primary"
-          @click="startReciting"
-          class="start-button">
-          开始背诵
-        </el-button>
+        <!-- <div
+          class="unit-card"
+          v-for="unit in currentUnits"
+          :key="unit.name">
+          <div class="card-header">测试</div>
+          <p>测试</p>
+          <div class="word-count">单词数量: 100</div>
+        </div> -->
       </div>
 
       <!-- 在模板中显示统计信息 -->
@@ -114,6 +106,22 @@
       :words="allWords"
       @restart="handleRestart"
       @updateWrongWords="updateWrongWordsList" />
+
+    <!-- 显示选中的单元数量和开始背诵按钮 -->
+    <div
+      v-if="selectedUnits.length && !isReciting"
+      class="selected-info">
+      <span
+        >已选择 {{ selectedUnits.length }} 个单元， 共
+        {{ totalWords }} 个单词</span
+      >
+      <el-button
+        type="primary"
+        @click="startReciting"
+        class="start-button">
+        开始背诵
+      </el-button>
+    </div>
   </div>
 </template>
 
@@ -342,7 +350,7 @@ const wrongWordsDrawerRef = ref();
 /* 基础容器样式 */
 .app-container {
   width: 100%;
-  min-height: 100vh;
+  height: 100dvh;
   background-color: #f5f7fa;
   padding: 16px;
   box-sizing: border-box;
@@ -404,7 +412,7 @@ const wrongWordsDrawerRef = ref();
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding-bottom: 80px;
+  padding-bottom: 20px;
 }
 
 /* 单元卡片 */
@@ -451,7 +459,7 @@ const wrongWordsDrawerRef = ref();
   align-items: center; /* 垂直居中 */
   justify-content: space-between; /* 水平分布 */
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
-  gap: 12px; /* 文字和按钮之间的间距 */
+  z-index: 1000;
 }
 
 /* 开始按钮 */
