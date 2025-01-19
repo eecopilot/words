@@ -268,36 +268,6 @@ const speakWord = async () => {
     ElMessage.error('朗读失败，请稍后重试');
   }
 };
-
-// 处理答案
-const handleAnswer = async (isCorrect: boolean) => {
-  if (isAnswered.value) return;
-
-  isAnswered.value = true;
-  const word = currentWord.value;
-
-  // 更新错误单词本
-  if (word.owner) {
-    // 无论是否在错误单词本中，都更新状态
-    wrongWordsManager.updateWordCorrectCount(word.owner, word, isCorrect);
-    emit('updateWrongWords');
-  } else if (!isCorrect) {
-    // 如果不是错误单词本中的单词，且答错了，添加到错误单词本
-    wrongWordsManager.addWrongWord(word.owner, word);
-    emit('updateWrongWords');
-  }
-
-  // 更新进度
-  updateProgress(word.name, isCorrect);
-
-  // 显示答案
-  showAnswer.value = true;
-
-  // 如果答对了，自动朗读
-  if (isCorrect) {
-    await speakWord();
-  }
-};
 </script>
 
 <style scoped>
