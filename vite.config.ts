@@ -23,7 +23,7 @@ export default defineConfig({
     viteCompression({
       verbose: true,
       disable: false,
-      threshold: 10240,
+      threshold: 10240, // 超过10kb的文件会被压缩
       algorithm: 'gzip',
       ext: '.gz',
     }),
