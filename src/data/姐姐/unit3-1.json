@@ -1,0 +1,115 @@
+{
+  "name": "七下英语(新教材)早背晚默小纸条 第5天",
+  "description": "Unit 3",
+  "type": "unit",
+  "words": [
+    {
+      "name": "fit",
+      "description": "adj.健康的;健壮的 v.适合"
+    },
+    {
+      "name": "baseball",
+      "description": "n.棒球(运动)"
+    },
+    {
+      "name": "glove",
+      "description": "n.(手指分开的)手套"
+    },
+    {
+      "name": "mat",
+      "description": "n.(运动用的)垫子"
+    },
+    {
+      "name": "rope",
+      "description": "n.绳子;粗绳"
+    },
+    {
+      "name": "jump rope",
+      "description": "跳绳用的绳子;跳绳(运动)"
+    },
+    {
+      "name": "racket",
+      "description": "n.(网球、羽毛球等的)球拍"
+    },
+    {
+      "name": "hardly",
+      "description": "adv.几乎不;几乎没有"
+    },
+    {
+      "name": "ever",
+      "description": "adv.在任何时候;从来;曾经"
+    },
+    {
+      "name": "hardly ever",
+      "description": "几乎从不"
+    },
+    {
+      "name": "once",
+      "description": "adv.一次;曾经 conj.一旦"
+    },
+    {
+      "name": "twice",
+      "description": "adv.两次;两倍"
+    },
+    {
+      "name": "mine",
+      "description": "pron.我的(所有物)"
+    },
+    {
+      "name": "hers",
+      "description": "pron.她的(所有物)"
+    },
+    {
+      "name": "maybe",
+      "description": "adv.也许;大概"
+    },
+    {
+      "name": "well-used",
+      "description": "adj.使用得多的"
+    },
+    {
+      "name": "practice",
+      "description": "n.练习;实践"
+    },
+    {
+      "name": "perfect",
+      "description": "adj.完美的;极好的"
+    },
+    {
+      "name": "seldom",
+      "description": "adv.很少;不常"
+    },
+    {
+      "name": "badminton",
+      "description": "n.羽毛球运动"
+    },
+    {
+      "name": "double",
+      "description": "n.双打(doubles);两倍 adj.成双的;两倍的"
+    },
+    {
+      "name": "sometime",
+      "description": "adv.在某个时候"
+    },
+    {
+      "name": "volleyball",
+      "description": "n.排球(运动)"
+    },
+    {
+      "name": "theirs",
+      "description": "pron.他们的，她们的，它们的(所有物)"
+    },
+    {
+      "name": "jog",
+      "description": "v.慢跑"
+    },
+    {
+      "name": "few",
+      "description": "adj.(表示否定的)很少的;几乎没有的"
+    },
+    {
+      "name": "a few",
+      "description": "少数;几个"
+    }
+  ]
+}

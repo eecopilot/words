@@ -58,15 +58,23 @@
           @click="toggleUnit(unit)">
           <div class="card-header">
             <h3>{{ unit.name }}</h3>
-            <div
-              v-if="unit.type === 'wrong-words'"
-              class="clear-icon"
-              @click.stop="clearWrongWords">
-              <el-icon><Delete /></el-icon>
+            <div class="card-actions">
+              <el-icon
+                v-if="isUnitCompleted(unit)"
+                class="completed-icon"
+                :style="{ color: '#67C23A' }">
+                <CircleCheck />
+              </el-icon>
+              <div
+                v-if="unit.type === 'wrong-words'"
+                class="clear-icon"
+                @click.stop="clearWrongWords">
+                <el-icon><Delete /></el-icon>
+              </div>
             </div>
           </div>
           <p>{{ unit.description }}</p>
-          <div class="word-count">单词数量: {{ unit.words.length }}</div>
+          <div class="word-count">单词数量: {{ unit.words?.length || 0 }}</div>
         </div>
         <!-- <div
           class="unit-card"
@@ -104,8 +112,10 @@
     <ReciteWords
       v-else
       :words="allWords"
+      :units="selectedUnits"
       @restart="handleRestart"
-      @updateWrongWords="updateWrongWordsList" />
+      @updateWrongWords="updateWrongWordsList"
+      @updateUnitCompletion="updateUnitCompletion" />
 
     <!-- 显示选中的单元数量和开始背诵按钮 -->
     <div
@@ -130,7 +140,7 @@ import { inject, ref, computed, watchEffect } from 'vue';
 import ReciteWords from './components/ReciteWords.vue';
 import WrongWordsDrawer from './components/WrongWordsDrawer.vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { Delete } from '@element-plus/icons-vue';
+import { Delete, CircleCheck } from '@element-plus/icons-vue';
 import { wrongWordsManager } from './utils/wrongWords';
 
 const wordUnits = inject('wordUnits', []) as any[];
@@ -295,6 +305,25 @@ const startReciting = () => {
   isReciting.value = true;
 };
 
+// 检查单元是否完成（100%正确率）
+const isUnitCompleted = (unit: any) => {
+  if (unit.type === 'wrong-words') return false;
+  const completionKey = `completion-${unit.owner}-${unit.name}`;
+  return localStorage.getItem(completionKey) === 'true';
+};
+
+// 更新单元完成状态
+const updateUnitCompletion = (unit: any, isCompleted: boolean) => {
+  const completionKey = `completion-${unit.owner}-${unit.name}`;
+  if (isCompleted) {
+    localStorage.setItem(completionKey, 'true');
+  } else {
+    localStorage.removeItem(completionKey);
+  }
+  // 触发视图更新
+  refreshTrigger.value++;
+};
+
 // 更新错误单词列表
 const updateWrongWordsList = () => {
   refreshTrigger.value++;
@@ -324,7 +353,11 @@ const learningStats = computed(() => {
   // 统计当前文件夹的学习情况
   if (currentFolder.value) {
     currentUnits.value.forEach((unit) => {
-      if (unit.type !== 'wrong-words') {
+      if (
+        unit.type !== 'wrong-words' &&
+        unit.words &&
+        Array.isArray(unit.words)
+      ) {
         unit.words.forEach((word: any) => {
           const wordKey = `${currentFolder.value}-${word.name}`;
           const wordProgress = progress[wordKey] || 0;

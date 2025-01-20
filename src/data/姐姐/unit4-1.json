@@ -1,0 +1,119 @@
+{
+  "name": "七下英语(新教材)早背晚默小纸条第7 天",
+  "description": "Unit 4",
+  "type": "unit",
+  "words": [
+    {
+      "name": "watermelon",
+      "description": "n.西瓜"
+    },
+    {
+      "name": "cabbage",
+      "description": "n.卷心菜"
+    },
+    {
+      "name": "mutton",
+      "description": "n.羊肉"
+    },
+    {
+      "name": "cookie",
+      "description": "n.曲奇饼"
+    },
+    {
+      "name": "onion",
+      "description": "n.洋葱;葱头"
+    },
+    {
+      "name": "dumpling",
+      "description": "n.饺子"
+    },
+    {
+      "name": "coffee",
+      "description": "n.咖啡"
+    },
+    {
+      "name": "bean",
+      "description": "n.豆"
+    },
+    {
+      "name": "chip",
+      "description": "n.炸薯条"
+    },
+    {
+      "name": "fish and chips",
+      "description": "炸鱼薯条"
+    },
+    {
+      "name": "salad",
+      "description": "n.沙拉;色拉"
+    },
+    {
+      "name": "porridge",
+      "description": "n.粥;麦片粥"
+    },
+    {
+      "name": "waiter",
+      "description": "n.(男)服务员"
+    },
+    {
+      "name": "What about...?",
+      "description": "......怎么样?"
+    },
+    {
+      "name": "taste",
+      "description": "v.有......味道;尝 n.味道"
+    },
+    {
+      "name": "anything",
+      "description": "pron.某事物;任何事物"
+    },
+    {
+      "name": "dish",
+      "description": "n.一道菜;盘子"
+    },
+    {
+      "name": "choice",
+      "description": "n.选择"
+    },
+    {
+      "name": "meal",
+      "description": "n.一餐所吃的食物;一餐"
+    },
+    {
+      "name": "pork",
+      "description": "n.猪肉"
+    },
+    {
+      "name": "strawberry",
+      "description": "n.草莓"
+    },
+    {
+      "name": "menu",
+      "description": "n.菜单"
+    },
+    {
+      "name": "customer",
+      "description": "n.顾客"
+    },
+    {
+      "name": "serve",
+      "description": "v.提供;服务"
+    },
+    {
+      "name": "waitress",
+      "description": "n.女服务员"
+    },
+    {
+      "name": "sir",
+      "description": "n.先生"
+    },
+    {
+      "name": "go with",
+      "description": "搭配;相配"
+    },
+    {
+      "name": "instead",
+      "description": "adv.反而;代替"
+    }
+  ]
+}

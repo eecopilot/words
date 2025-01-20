@@ -100,7 +100,12 @@
 
       <el-button
         type="primary"
-        @click="$emit('restart')"
+        @click="
+          () => {
+            checkAndUpdateUnitCompletion();
+            emit('restart');
+          }
+        "
         class="restart-btn">
         重新开始
       </el-button>
@@ -123,10 +128,41 @@ const props = defineProps<{
     owner: string;
     type?: string;
   }[];
+  units?: {
+    name: string;
+    owner: string;
+    type?: string;
+  }[];
   mode?: 'normal' | 'wrong-words';
 }>();
 
-const emit = defineEmits(['restart', 'updateWrongWords']);
+const emit = defineEmits([
+  'restart',
+  'updateWrongWords',
+  'updateUnitCompletion',
+]);
+
+// 检查是否需要更新单元完成状态
+const checkAndUpdateUnitCompletion = () => {
+  // 如果是错误单词本，不更新完成状态
+  if (props.words[0]?.type === 'wrong-words') return;
+
+  // 如果正确率为100%，更新所有单元的完成状态
+  if (wrongAnswers.value.size === 0 && props.units) {
+    props.units.forEach((unit) => {
+      if (unit.type !== 'wrong-words') {
+        emit('updateUnitCompletion', unit, true);
+      }
+    });
+  } else if (props.units) {
+    // 如果有错误，移除完成状态
+    props.units.forEach((unit) => {
+      if (unit.type !== 'wrong-words') {
+        emit('updateUnitCompletion', unit, false);
+      }
+    });
+  }
+};
 
 // 状态变量
 const currentIndex = ref(0);
