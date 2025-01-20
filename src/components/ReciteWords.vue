@@ -2,7 +2,12 @@
   <div class="recite-container">
     <div class="header">
       <el-button
-        @click="$emit('restart')"
+        @click="
+          () => {
+            checkAndUpdateUnitCompletion();
+            $emit('restart');
+          }
+        "
         class="back-btn">
         <el-icon><ArrowLeft /></el-icon>
         返回
@@ -147,8 +152,8 @@ const checkAndUpdateUnitCompletion = () => {
   // 如果是错误单词本，不更新完成状态
   if (props.words[0]?.type === 'wrong-words') return;
 
-  // 如果正确率为100%，更新所有单元的完成状态
-  if (wrongAnswers.value.size === 0 && props.units) {
+  // 只有在完成所有单词且正确率为100%时，才更新单元完成状态
+  if (isFinished.value && wrongAnswers.value.size === 0 && props.units) {
     props.units.forEach((unit) => {
       if (unit.type !== 'wrong-words') {
         emit('updateUnitCompletion', unit, true);
