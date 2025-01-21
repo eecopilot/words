@@ -76,14 +76,6 @@
           <p>{{ unit.description }}</p>
           <div class="word-count">单词数量: {{ unit.words?.length || 0 }}</div>
         </div>
-        <!-- <div
-          class="unit-card"
-          v-for="unit in currentUnits"
-          :key="unit.name">
-          <div class="card-header">测试</div>
-          <p>测试</p>
-          <div class="word-count">单词数量: 100</div>
-        </div> -->
       </div>
 
       <!-- 在模板中显示统计信息 -->
@@ -249,8 +241,10 @@ const currentUnits = computed(() => {
   return units;
 });
 
+const loadUnitWords = inject('loadUnitWords') as (unit: any) => Promise<any>;
+
 // 切换单元选择状态
-const toggleUnit = (unit: any) => {
+const toggleUnit = async (unit: any) => {
   // 如果是错误单词本
   if (unit.type === 'wrong-words') {
     // 如果已经选中了其他单元，不允许选择错误单词本
@@ -258,15 +252,8 @@ const toggleUnit = (unit: any) => {
       selectedUnits.value.length > 0 &&
       selectedUnits.value[0].type !== 'wrong-words'
     ) {
-      ElMessage.warning('错误单词本只能单独练习');
+      ElMessage.warning('错误单词本不能与其他单元一起背诵');
       return;
-    }
-    // 切换错误单词本的选中状态
-    const index = selectedUnits.value.indexOf(unit);
-    if (index === -1) {
-      selectedUnits.value = [unit]; // 只允许选中错误单词本一个
-    } else {
-      selectedUnits.value = [];
     }
   } else {
     // 如果已经选中了错误单词本，不允许选择其他单元
@@ -274,16 +261,26 @@ const toggleUnit = (unit: any) => {
       selectedUnits.value.length > 0 &&
       selectedUnits.value[0].type === 'wrong-words'
     ) {
-      ElMessage.warning('请先取消选择错误单词本');
+      ElMessage.warning('其他单元不能与错误单词本一起背诵');
       return;
     }
-    // 切换普通单元的选中状态
-    const index = selectedUnits.value.indexOf(unit);
-    if (index === -1) {
-      selectedUnits.value.push(unit);
-    } else {
-      selectedUnits.value.splice(index, 1);
+  }
+
+  // 加载单元的单词数据
+  if (!unit.loaded) {
+    try {
+      await loadUnitWords(unit);
+    } catch (error) {
+      ElMessage.error('加载单词数据失败');
+      return;
     }
+  }
+
+  const index = selectedUnits.value.indexOf(unit);
+  if (index === -1) {
+    selectedUnits.value.push(unit);
+  } else {
+    selectedUnits.value.splice(index, 1);
   }
 };
 
