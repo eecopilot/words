@@ -22,7 +22,7 @@
       @clear="updateWrongWordsList" />
 
     <div
-      v-if="!isReciting"
+      v-if="!isReciting && !isReading"
       class="content-wrapper">
       <div class="header-actions">
         <h1>英语单词学习</h1>
@@ -110,27 +110,45 @@
 
     <!-- 背诵模式 -->
     <ReciteWords
-      v-else
+      v-else-if="isReciting"
       :words="allWords"
       :units="selectedUnits"
       @restart="handleRestart"
       @updateWrongWords="updateWrongWordsList"
       @updateUnitCompletion="updateUnitCompletion" />
 
-    <!-- 显示选中的单元数量和开始背诵按钮 -->
+    <!-- 朗读模式 -->
+    <WordList
+      v-else-if="isReading"
+      :words="allWords"
+      @back="isReading = false" />
+
+    <!-- 显示选中的单元数量和操作按钮 -->
     <div
-      v-if="selectedUnits.length && !isReciting"
+      v-if="selectedUnits.length && !isReciting && !isReading"
       class="selected-info">
       <span
         >已选择 {{ selectedUnits.length }} 个单元， 共
         {{ totalWords }} 个单词</span
       >
-      <el-button
-        type="primary"
-        @click="startReciting"
-        class="start-button">
-        开始背诵
-      </el-button>
+      <div class="action-buttons">
+        <el-button-group>
+          <el-button
+            type="primary"
+            size="small"
+            @click="startReading"
+            class="action-button">
+            开始朗读
+          </el-button>
+          <el-button
+            type="primary"
+            size="small"
+            @click="startReciting"
+            class="action-button">
+            开始背诵
+          </el-button>
+        </el-button-group>
+      </div>
     </div>
   </div>
 </template>
@@ -139,6 +157,7 @@
 import { inject, ref, computed, watchEffect } from 'vue';
 import ReciteWords from './components/ReciteWords.vue';
 import WrongWordsDrawer from './components/WrongWordsDrawer.vue';
+import WordList from './components/WordList.vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { Delete, CircleCheck } from '@element-plus/icons-vue';
 import { wrongWordsManager } from './utils/wrongWords';
@@ -276,6 +295,9 @@ const totalWords = computed(() => {
 // 背诵模式状态
 const isReciting = ref(false);
 
+// 朗读模式状态
+const isReading = ref(false);
+
 // 所有选中单元的单词列表
 const allWords = computed(() => {
   const words: any[] = [];
@@ -290,8 +312,11 @@ const allWords = computed(() => {
       words.push(...unitsWords);
     }
   });
-  // 随机打乱单词顺序
-  return words.sort(() => Math.random() - 0.5);
+  // 只在背诵模式下随机打乱单词顺序
+  if (isReciting.value) {
+    return words.sort(() => Math.random() - 0.5);
+  }
+  return words;
 });
 
 // 开始背诵
@@ -303,6 +328,19 @@ const startReciting = () => {
   }
 
   isReciting.value = true;
+};
+
+// 开始朗读
+const startReading = () => {
+  // 检查是否有单词要朗读
+  if (allWords.value.length === 0) {
+    ElMessage.warning('请先选择要朗读的单元');
+    return;
+  }
+
+  // 设置朗读模式状态
+  isReciting.value = false;
+  isReading.value = true;
 };
 
 // 检查单元是否完成（100%正确率）
@@ -498,11 +536,16 @@ const wrongWordsDrawerRef = ref();
   z-index: 1000;
 }
 
-/* 开始按钮 */
-.start-button {
+/* 操作按钮区域 */
+.action-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+/* 操作按钮 */
+.action-button {
   flex-shrink: 0; /* 防止按钮被压缩 */
-  width: 120px; /* 固定按钮宽度 */
-  height: 40px;
+  padding: 14px 12px;
 }
 
 /* 选择信息文字 */
