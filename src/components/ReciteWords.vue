@@ -223,9 +223,15 @@ const checkAnswer = () => {
   // 记录用户输入
   userInputHistory.value[currentIndex.value] = userInput.value.trim();
 
-  isCorrect.value =
-    userInput.value.trim().toLowerCase() ===
-    currentWord.value.name.toLowerCase();
+  // 标准化省略号处理
+  const normalizeEllipsis = (text: string) => {
+    return text.replace(/\.{3}|…/g, '...').toLowerCase();
+  };
+
+  const normalizedInput = normalizeEllipsis(userInput.value.trim());
+  const normalizedAnswer = normalizeEllipsis(currentWord.value.name);
+
+  isCorrect.value = normalizedInput === normalizedAnswer;
 
   // 检查当前单词是否在错误单词本中
   const isWrongWordMode = currentWord.value.type === 'wrong-words';
