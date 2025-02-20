@@ -1,0 +1,42 @@
+{
+  "name": "Unit 1 知识要点",
+  "description": "句子",
+  "type": "sentence",
+  "words": [
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "Where are you from?",
+          "description": "你来自哪里？"
+        },
+        {
+          "sentence": "I'm from China.",
+          "description": "我来自中国。"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "What's your name?",
+          "description": "你叫什么名字？"
+        },
+        {
+          "sentence": "My name is John.",
+          "description": "我叫约翰。"
+        }
+      ]
+    },
+    {
+      "type": "single",
+      "data": [
+        {
+          "sentence": "What's your name?",
+          "description": "你叫什么名字？"
+        }
+      ]
+    }
+  ]
+}

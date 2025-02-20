@@ -1,0 +1,27 @@
+{
+  "name": "Unit 1 知识要点",
+  "description": "A类单词",
+  "type": "unit",
+  "words": [
+    { "name": "where", "description": "哪里" },
+    { "name": "from", "description": "来自" },
+    { "name": "China", "description": "中国" },
+    { "name": "Canada", "description": "加拿大" },
+    { "name": "the USA", "description": "美国" },
+    { "name": "the UK", "description": "英国" },
+    { "name": "who", "description": "谁" },
+    { "name": "teacher", "description": "老师" },
+    { "name": "student", "description": "学生" },
+    { "name": "after", "description": "在之后" },
+    { "name": "girl", "description": "女孩" },
+    { "name": "boy", "description": "男孩" },
+    { "name": "woman", "description": "女人" },
+    { "name": "man", "description": "男人" },
+    { "name": "he", "description": "他" },
+    { "name": "she", "description": "她" },
+    { "name": "this", "description": "这" },
+    { "name": "that", "description": "那" },
+    { "name": "Mr", "description": "先生" },
+    { "name": "about", "description": "关于" }
+  ]
+}

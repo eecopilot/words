@@ -1,0 +1,27 @@
+{
+  "name": "Unit 1 知识要点",
+  "description": "B类单词",
+  "type": "unit",
+  "words": [
+    { "name": "classmate", "description": "同班同学" },
+    { "name": "neighbour", "description": "邻居" },
+    { "name": "English", "description": "英语" },
+    { "name": "very", "description": "非常" },
+    { "name": "today", "description": "今天" },
+    { "name": "new", "description": "新的" },
+    { "name": "friend", "description": "朋友" },
+    { "name": "panda", "description": "熊猫" },
+    { "name": "bear", "description": "熊" },
+    { "name": "rice", "description": "米饭" },
+    { "name": "Russia", "description": "俄罗斯" },
+    { "name": "Thailand", "description": "泰国" },
+    { "name": "pineapple", "description": "菠萝" },
+    { "name": "back", "description": "回来" },
+    { "name": "east", "description": "东" },
+    { "name": "west", "description": "西" },
+    { "name": "home", "description": "家" },
+    { "name": "best", "description": "最好" },
+    { "name": "trip", "description": "旅行" },
+    { "name": "fun", "description": "有趣" }
+  ]
+}

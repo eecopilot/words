@@ -16,6 +16,7 @@ declare module 'vue' {
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ReciteWords: typeof import('./src/components/ReciteWords.vue')['default']
+    SentenceList: typeof import('./src/components/SentenceList.vue')['default']
     WordList: typeof import('./src/components/WordList.vue')['default']
     WrongWordsDrawer: typeof import('./src/components/WrongWordsDrawer.vue')['default']
   }

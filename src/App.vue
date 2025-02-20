@@ -119,8 +119,14 @@
 
     <!-- 朗读模式 -->
     <WordList
-      v-else-if="isReading"
+      v-else-if="isReading && !isSentenceType"
       :words="allWords"
+      @back="isReading = false" />
+
+    <!-- 句子朗读模式 -->
+    <SentenceList
+      v-else-if="isReading && isSentenceType"
+      :sentences="allWords"
       @back="isReading = false" />
 
     <!-- 显示选中的单元数量和操作按钮 -->
@@ -141,6 +147,7 @@
             开始朗读
           </el-button>
           <el-button
+            v-if="!isSentenceType"
             type="primary"
             size="small"
             @click="startReciting"
@@ -158,6 +165,7 @@ import { inject, ref, computed, watchEffect } from 'vue';
 import ReciteWords from './components/ReciteWords.vue';
 import WrongWordsDrawer from './components/WrongWordsDrawer.vue';
 import WordList from './components/WordList.vue';
+import SentenceList from './components/SentenceList.vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { Delete, CircleCheck } from '@element-plus/icons-vue';
 import { wrongWordsManager } from './utils/wrongWords';
@@ -277,6 +285,24 @@ const toggleUnit = (unit: any) => {
       ElMessage.warning('请先取消选择错误单词本');
       return;
     }
+
+    // 检查是否在尝试混合选择句子和单词单元
+    const isSentenceUnit = unit.type === 'sentence';
+    const hasSelectedUnits = selectedUnits.value.length > 0;
+    const hasSelectedSentence =
+      hasSelectedUnits && selectedUnits.value[0].type === 'sentence';
+    const hasSelectedWord =
+      hasSelectedUnits && selectedUnits.value[0].type !== 'sentence';
+
+    if (
+      hasSelectedUnits &&
+      ((isSentenceUnit && hasSelectedWord) ||
+        (!isSentenceUnit && hasSelectedSentence))
+    ) {
+      ElMessage.warning('句子练习和单词练习不能同时选择');
+      return;
+    }
+
     // 切换普通单元的选中状态
     const index = selectedUnits.value.indexOf(unit);
     if (index === -1) {
@@ -304,35 +330,44 @@ const allWords = computed(() => {
   selectedUnits.value.forEach((unit) => {
     // 确保 unit.words 存在且不为空
     if (unit.words && unit.words.length > 0) {
-      // 为每个单词添加所有者信息
-      const unitsWords = unit.words.map((word: any) => ({
-        ...word,
-        owner: unit.owner,
-      }));
-      words.push(...unitsWords);
+      if (unit.type === 'sentence') {
+        // 对于句子类型，根据type分组处理
+        const processedWords = unit.words.map((word: any) => {
+          if (word.type === 'dialogue') {
+            return word.data;
+          } else if (word.type === 'single') {
+            return [word.data[0]];
+          }
+          return [];
+        });
+        words.push(...processedWords);
+      } else {
+        // 为每个单词添加所有者信息
+        const unitsWords = unit.words.map((word: any) => ({
+          ...word,
+          owner: unit.owner,
+        }));
+        words.push(...unitsWords);
+      }
     }
   });
-  // 只在背诵模式下随机打乱单词顺序
-  if (isReciting.value) {
+  // 只在背诵模式下且不是句子类型时随机打乱单词顺序
+  if (isReciting.value && !isSentenceType.value) {
     return words.sort(() => Math.random() - 0.5);
   }
   return words;
 });
 
-// 开始背诵
-const startReciting = () => {
-  // 检查是否有单词要背诵
-  if (allWords.value.length === 0) {
-    ElMessage.warning('请先选择要背诵的单元');
-    return;
-  }
-
-  isReciting.value = true;
-};
+// 计算是否是句子类型
+const isSentenceType = computed(() => {
+  return (
+    selectedUnits.value.length > 0 && selectedUnits.value[0].type === 'sentence'
+  );
+});
 
 // 开始朗读
 const startReading = () => {
-  // 检查是否有单词要朗读
+  // 检查是否有内容要朗读
   if (allWords.value.length === 0) {
     ElMessage.warning('请先选择要朗读的单元');
     return;
@@ -341,6 +376,23 @@ const startReading = () => {
   // 设置朗读模式状态
   isReciting.value = false;
   isReading.value = true;
+};
+
+// 开始背诵
+const startReciting = () => {
+  // 如果是句子类型，不允许背诵
+  if (isSentenceType.value) {
+    ElMessage.warning('句子单元只支持朗读模式');
+    return;
+  }
+
+  // 检查是否有单词要背诵
+  if (allWords.value.length === 0) {
+    ElMessage.warning('请先选择要背诵的单元');
+    return;
+  }
+
+  isReciting.value = true;
 };
 
 // 检查单元是否完成（100%正确率）
