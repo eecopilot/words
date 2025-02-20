@@ -246,8 +246,14 @@ const initializeApp = async () => {
     );
     await Promise.all(allFolders.map(loadFolderData));
 
-    // 设置第一个文件夹为当前选中
-    if (allFolders.length > 0) {
+    // 获取上次选中的文件夹
+    const lastSelectedFolder = localStorage.getItem('lastSelectedFolder');
+
+    // 如果有上次选中的文件夹且该文件夹仍然存在，则选中它
+    if (lastSelectedFolder && allFolders.includes(lastSelectedFolder)) {
+      currentFolder.value = lastSelectedFolder;
+    } else if (allFolders.length > 0) {
+      // 否则选中第一个文件夹
       currentFolder.value = allFolders[0];
     }
   } catch (error) {
@@ -262,6 +268,8 @@ const initializeApp = async () => {
 const selectFolder = (folder: string) => {
   if (currentFolder.value === folder) return;
   currentFolder.value = folder;
+  // 保存选中的文件夹到 localStorage
+  localStorage.setItem('lastSelectedFolder', folder);
   selectedUnits.value = []; // 切换文件夹时清空选择
 };
 
