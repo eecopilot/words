@@ -20,12 +20,116 @@
       "type": "dialogue",
       "data": [
         {
-          "sentence": "What's your name?",
-          "description": "你叫什么名字？"
+          "sentence": "Where is he from?",
+          "description": "他来自哪里？"
         },
         {
-          "sentence": "My name is John.",
-          "description": "我叫约翰。"
+          "sentence": "He is from Canada.",
+          "description": "他来自加拿大。"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "Where is she from?",
+          "description": "她来自哪里？"
+        },
+        {
+          "sentence": "She is from the USA.",
+          "description": "她来自美国。"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "Who's that woman?",
+          "description": "那个女人是谁？"
+        },
+        {
+          "sentence": "That is my teacher.",
+          "description": "那是我的老师。"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "Who's that boy?",
+          "description": "那个男孩是谁？"
+        },
+        {
+          "sentence": "He is my brother.",
+          "description": "他是我的哥哥。"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "Thank you!",
+          "description": "谢谢！"
+        },
+        {
+          "sentence": "You're welcome.",
+          "description": "不用谢！"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "Let me help. After you!",
+          "description": "我来帮忙，你先请！"
+        },
+        {
+          "sentence": "Thank you!",
+          "description": "谢谢！"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "How old are you?",
+          "description": "你几岁？"
+        },
+        {
+          "sentence": "I'm nine years old.",
+          "description": "我9岁。"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "How are you?",
+          "description": "你好吗？"
+        },
+        {
+          "sentence": "I'm fine. Thank you!",
+          "description": "我很好，谢谢！"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "Nice to meet you.",
+          "description": "很高兴见到你。"
+        },
+        {
+          "sentence": "Nice to meet you too.",
+          "description": "也很高兴见到你。"
         }
       ]
     },
@@ -33,8 +137,26 @@
       "type": "single",
       "data": [
         {
-          "sentence": "What's your name?",
-          "description": "你叫什么名字？"
+          "sentence": "What  about  you?",
+          "description": "你呢？"
+        }
+      ]
+    },
+    {
+      "type": "single",
+      "data": [
+        {
+          "sentence": "Welocme to China!",
+          "description": "欢迎来到中国。"
+        }
+      ]
+    },
+    {
+      "type": "single",
+      "data": [
+        {
+          "sentence": "She is very nice.",
+          "description": "她很好。"
         }
       ]
     }

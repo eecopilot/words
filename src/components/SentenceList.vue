@@ -129,7 +129,7 @@ const speakDialogue = async (
 
       // 在句子之间添加短暂停顿
       if (index < group.length - 1) {
-        await new Promise((resolve) => setTimeout(resolve, 800));
+        await new Promise((resolve) => setTimeout(resolve, 500));
       }
     }
   } catch (error) {

@@ -1,5 +1,12 @@
 <template>
   <div class="app-container">
+    <!-- 添加加载状态显示 -->
+    <div
+      v-if="isLoading"
+      class="loading-overlay">
+      <el-icon class="loading-icon"><Loading /></el-icon>
+      <span>加载中...</span>
+    </div>
     <audio
       id="tts-audio"
       playsinline
@@ -161,20 +168,23 @@
 </template>
 
 <script setup lang="ts">
-import { inject, ref, computed, watchEffect } from 'vue';
+import { ref, computed, watchEffect } from 'vue';
 import ReciteWords from './components/ReciteWords.vue';
 import WrongWordsDrawer from './components/WrongWordsDrawer.vue';
 import WordList from './components/WordList.vue';
 import SentenceList from './components/SentenceList.vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { Delete, CircleCheck } from '@element-plus/icons-vue';
+import { Delete, CircleCheck, Loading } from '@element-plus/icons-vue';
 import { wrongWordsManager } from './utils/wrongWords';
 
-const wordUnits = inject('wordUnits', []) as any[];
+// 改为本地状态管理
+const wordUnits = ref<any[]>([]);
+const isLoading = ref(true);
+const loadedFolders = ref(new Set<string>());
 
 // 获取所有文件夹
 const folders = computed(() => {
-  const folderSet = new Set(wordUnits.map((unit) => unit.owner));
+  const folderSet = new Set(wordUnits.value.map((unit) => unit.owner));
   return Array.from(folderSet);
 });
 
@@ -191,11 +201,72 @@ watchEffect(() => {
   }
 });
 
-// 选择文件夹
+// 异步加载单个文件夹的数据
+const loadFolderData = async (folder: string) => {
+  if (loadedFolders.value.has(folder)) return;
+
+  try {
+    // 使用 Vite 的 import.meta.glob 来获取文件列表
+    const modules = import.meta.glob('./data/**/*.json', { eager: true });
+    const folderModules = Object.entries(modules)
+      .filter(([path]) => path.includes(`/data/${folder}/`))
+      .map(([_, module]) => ({
+        ...(module as any).default,
+        owner: folder,
+      }));
+
+    wordUnits.value.push(...folderModules);
+    loadedFolders.value.add(folder);
+  } catch (error) {
+    console.error(`Error loading folder ${folder}:`, error);
+    ElMessage.error(`加载 ${folder} 失败，请刷新页面重试`);
+  }
+};
+
+// 初始加载
+const initializeApp = async () => {
+  isLoading.value = true;
+  try {
+    // 获取所有文件夹
+    const modules = import.meta.glob('./data/**/*.json', { eager: true });
+
+    // 提取所有文件夹名称
+    const folderNames = new Set(
+      Object.keys(modules)
+        .map((path) => {
+          const match = path.match(/\.\/data\/([^/]+)\//);
+          return match ? match[1] : null;
+        })
+        .filter(Boolean)
+    );
+
+    // 加载所有文件夹的数据
+    const allFolders = Array.from(folderNames).filter(
+      (folder): folder is string => folder !== null
+    );
+    await Promise.all(allFolders.map(loadFolderData));
+
+    // 设置第一个文件夹为当前选中
+    if (allFolders.length > 0) {
+      currentFolder.value = allFolders[0];
+    }
+  } catch (error) {
+    console.error('Error initializing app:', error);
+    ElMessage.error('加载数据失败，请刷新页面重试');
+  } finally {
+    isLoading.value = false;
+  }
+};
+
+// 选择文件夹时不需要再加载数据，因为已经全部加载过了
 const selectFolder = (folder: string) => {
+  if (currentFolder.value === folder) return;
   currentFolder.value = folder;
   selectedUnits.value = []; // 切换文件夹时清空选择
 };
+
+// 初始化应用
+initializeApp();
 
 // 添加一个 ref 来触发视图更新
 const refreshTrigger = ref(0);
@@ -235,7 +306,7 @@ const currentUnits = computed(() => {
   if (!currentFolder.value) return [];
 
   // 先获取普通单词集
-  const units = wordUnits.filter(
+  const units = wordUnits.value.filter(
     (unit) => unit.owner === currentFolder.value && unit.type !== 'wrong-words'
   );
 
@@ -683,5 +754,35 @@ const wrongWordsDrawerRef = ref();
 
 .unit-card[data-type='wrong-words'] h3 {
   color: #f56c6c;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  z-index: 2000;
+}
+
+.loading-icon {
+  font-size: 32px;
+  color: #409eff;
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>
