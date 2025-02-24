@@ -43,6 +43,10 @@ export default defineConfig({
         entryFileNames: 'js/[name]-[hash].js',
         assetFileNames: '[ext]/[name]-[hash].[ext]',
         manualChunks(id) {
+          // 为 data 目录创建单独的 chunk
+          if (id.includes('/data/')) {
+            return 'word-data';
+          }
           if (id.includes('node_modules')) {
             if (id.includes('element-plus')) {
               return 'element-plus';

@@ -176,17 +176,15 @@ import SentenceList from './components/SentenceList.vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { Delete, CircleCheck, Loading } from '@element-plus/icons-vue';
 import { wrongWordsManager } from './utils/wrongWords';
+import { getFolders, getFolderUnits } from './data';
+import type { Unit } from './data';
 
 // 改为本地状态管理
-const wordUnits = ref<any[]>([]);
+const wordUnits = ref<Unit[]>([]);
 const isLoading = ref(true);
-const loadedFolders = ref(new Set<string>());
 
 // 获取所有文件夹
-const folders = computed(() => {
-  const folderSet = new Set(wordUnits.value.map((unit) => unit.owner));
-  return Array.from(folderSet);
-});
+const folders = computed(() => getFolders());
 
 // 当前选中的文件夹
 const currentFolder = ref('');
@@ -201,50 +199,12 @@ watchEffect(() => {
   }
 });
 
-// 异步加载单个文件夹的数据
-const loadFolderData = async (folder: string) => {
-  if (loadedFolders.value.has(folder)) return;
-
-  try {
-    // 使用 Vite 的 import.meta.glob 来获取文件列表
-    const modules = import.meta.glob('./data/**/*.json', { eager: true });
-    const folderModules = Object.entries(modules)
-      .filter(([path]) => path.includes(`/data/${folder}/`))
-      .map(([_, module]) => ({
-        ...(module as any).default,
-        owner: folder,
-      }));
-
-    wordUnits.value.push(...folderModules);
-    loadedFolders.value.add(folder);
-  } catch (error) {
-    console.error(`Error loading folder ${folder}:`, error);
-    ElMessage.error(`加载 ${folder} 失败，请刷新页面重试`);
-  }
-};
-
-// 初始加载
+// 初始化应用
 const initializeApp = async () => {
   isLoading.value = true;
   try {
-    // 获取所有文件夹
-    const modules = import.meta.glob('./data/**/*.json', { eager: true });
-
-    // 提取所有文件夹名称
-    const folderNames = new Set(
-      Object.keys(modules)
-        .map((path) => {
-          const match = path.match(/\.\/data\/([^/]+)\//);
-          return match ? match[1] : null;
-        })
-        .filter(Boolean)
-    );
-
-    // 加载所有文件夹的数据
-    const allFolders = Array.from(folderNames).filter(
-      (folder): folder is string => folder !== null
-    );
-    await Promise.all(allFolders.map(loadFolderData));
+    // 获取所有文件夹的数据
+    const allFolders = getFolders();
 
     // 获取上次选中的文件夹
     const lastSelectedFolder = localStorage.getItem('lastSelectedFolder');
@@ -256,6 +216,16 @@ const initializeApp = async () => {
       // 否则选中第一个文件夹
       currentFolder.value = allFolders[0];
     }
+
+    // 初始化单元数据
+    wordUnits.value = [];
+    allFolders.forEach((folder) => {
+      const units = getFolderUnits(folder).map((unit: Unit) => ({
+        ...unit,
+        owner: folder,
+      }));
+      wordUnits.value.push(...units);
+    });
   } catch (error) {
     console.error('Error initializing app:', error);
     ElMessage.error('加载数据失败，请刷新页面重试');
@@ -264,7 +234,10 @@ const initializeApp = async () => {
   }
 };
 
-// 选择文件夹时不需要再加载数据，因为已经全部加载过了
+// 确保调用初始化函数
+initializeApp();
+
+// 选择文件夹
 const selectFolder = (folder: string) => {
   if (currentFolder.value === folder) return;
   currentFolder.value = folder;
@@ -272,9 +245,6 @@ const selectFolder = (folder: string) => {
   localStorage.setItem('lastSelectedFolder', folder);
   selectedUnits.value = []; // 切换文件夹时清空选择
 };
-
-// 初始化应用
-initializeApp();
 
 // 添加一个 ref 来触发视图更新
 const refreshTrigger = ref(0);
