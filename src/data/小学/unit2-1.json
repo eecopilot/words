@@ -1,0 +1,151 @@
+{
+  "name": "Unit 2 知识要点",
+  "description": "A类单词",
+  "type": "unit",
+  "words": [
+    {
+      "name": "slow",
+      "description": "慢"
+    },
+    {
+      "name": "long",
+      "description": "长"
+    },
+    {
+      "name": "big",
+      "description": "大"
+    },
+    {
+      "name": "small",
+      "description": "小"
+    },
+    {
+      "name": "short",
+      "description": "矮, 短"
+    },
+    {
+      "name": "thin",
+      "description": "瘦"
+    },
+    {
+      "name": "tall",
+      "description": "高"
+    },
+    {
+      "name": "fat",
+      "description": "胖"
+    },
+    {
+      "name": "fast",
+      "description": "快"
+    },
+    {
+      "name": "have/has",
+      "description": "有"
+    },
+    {
+      "name": "leg",
+      "description": "腿"
+    },
+    {
+      "name": "ear",
+      "description": "耳朵"
+    },
+    {
+      "name": "body",
+      "description": "身体"
+    },
+    {
+      "name": "tail",
+      "description": "尾巴"
+    },
+    {
+      "name": "cute",
+      "description": "可爱的"
+    },
+    {
+      "name": "draw a picture",
+      "description": "画图片"
+    },
+    {
+      "name": "make a card",
+      "description": "制作卡片"
+    },
+    {
+      "name": "sing and dance",
+      "description": "唱歌和跳舞"
+    },
+    {
+      "name": "often",
+      "description": "经常"
+    },
+    {
+      "name": "love",
+      "description": "喜爱"
+    },
+    {
+      "name": "It's",
+      "description": "它是"
+    },
+    {
+      "name": "it's",
+      "description": "它的"
+    },
+    {
+      "name": "swim",
+      "description": "游泳"
+    },
+    {
+      "name": "run",
+      "description": "跑"
+    },
+    {
+      "name": "fly",
+      "description": "飞"
+    },
+    {
+      "name": "pet",
+      "description": "宠物"
+    },
+    {
+      "name": "his",
+      "description": "他的"
+    },
+    {
+      "name": "her",
+      "description": "她的"
+    },
+    {
+      "name": "say",
+      "description": "说"
+    },
+    {
+      "name": "face",
+      "description": "脸"
+    },
+    {
+      "name": "mouth",
+      "description": "嘴"
+    },
+    {
+      "name": "share toys",
+      "description": "分享玩具"
+    },
+    {
+      "name": "play together",
+      "description": "一起玩"
+    },
+    {
+      "name": "listen with care",
+      "description": "认真听"
+    },
+    {
+      "name": "Let's",
+      "description": "让我们"
+    },
+    {
+      "name": "talk",
+      "description": "说话"
+    }
+  ]
+}

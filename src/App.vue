@@ -383,9 +383,12 @@ const allWords = computed(() => {
         // 对于句子类型，根据type分组处理
         const processedWords = unit.words.map((word: any) => {
           if (word.type === 'dialogue') {
-            return word.data;
+            return word.data.map((item: any) => ({
+              ...item,
+              type: 'dialogue',
+            }));
           } else if (word.type === 'single') {
-            return [word.data[0]];
+            return word.data.map((item: any) => ({ ...item, type: 'single' }));
           }
           return [];
         });

@@ -1,0 +1,123 @@
+{
+  "name": "Unit 2 知识要点",
+  "description": "B类单词",
+  "type": "unit",
+  "words": [
+    {
+      "name": "very",
+      "description": "非常"
+    },
+    {
+      "name": "right",
+      "description": "正确"
+    },
+    {
+      "name": "friend",
+      "description": "朋友"
+    },
+    {
+      "name": "friendly",
+      "description": "友好的"
+    },
+    {
+      "name": "us",
+      "description": "我们"
+    },
+    {
+      "name": "but",
+      "description": "但是"
+    },
+    {
+      "name": "or",
+      "description": "或者"
+    },
+    {
+      "name": "that",
+      "description": "那"
+    },
+    {
+      "name": "gift",
+      "description": "礼物"
+    },
+    {
+      "name": "all",
+      "description": "全部"
+    },
+    {
+      "name": "so",
+      "description": "如此"
+    },
+    {
+      "name": "much",
+      "description": "许多"
+    },
+    {
+      "name": "song",
+      "description": "歌曲"
+    },
+    {
+      "name": "smile",
+      "description": "微笑"
+    },
+    {
+      "name": "birthday",
+      "description": "生日"
+    },
+    {
+      "name": "our",
+      "description": "我们的"
+    },
+    {
+      "name": "fun",
+      "description": "有趣的"
+    },
+    {
+      "name": "write",
+      "description": "写"
+    },
+    {
+      "name": "fox",
+      "description": "狐狸"
+    },
+    {
+      "name": "neck",
+      "description": "脖子"
+    },
+    {
+      "name": "hair",
+      "description": "头发"
+    },
+    {
+      "name": "fruit",
+      "description": "水果"
+    },
+    {
+      "name": "also",
+      "description": "也"
+    },
+    {
+      "name": "different",
+      "description": "不同的"
+    },
+    {
+      "name": "act",
+      "description": "扮演"
+    },
+    {
+      "name": "way",
+      "description": "方法"
+    },
+    {
+      "name": "idea",
+      "description": "想法"
+    },
+    {
+      "name": "ourselves",
+      "description": "我们自己"
+    },
+    {
+      "name": "express",
+      "description": "表达"
+    }
+  ]
+}

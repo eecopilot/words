@@ -19,7 +19,7 @@
             {{ isDialogue(group) ? '对话' : '单句' }}
           </div>
           <el-button
-            v-if="isDialogue(group)"
+            v-if="isDialogue(group) || (!isDialogue(group) && group.length > 1)"
             type="primary"
             size="small"
             :class="{ speaking: isGroupSpeaking(groupIndex) }"
@@ -30,7 +30,15 @@
               class="speaking-icon">
               <Microphone />
             </el-icon>
-            {{ isGroupSpeaking(groupIndex) ? '正在朗诵...' : '朗诵对话' }}
+            {{
+              isGroupSpeaking(groupIndex)
+                ? '正在朗诵...'
+                : isDialogue(group)
+                ? '朗诵对话'
+                : isGroupPlaying(groupIndex)
+                ? '停止朗读'
+                : '朗读所有'
+            }}
           </el-button>
         </div>
         <div
@@ -45,8 +53,11 @@
             class="speak-btn"
             :class="{
               speaking:
-                currentSpeakingGroup === groupIndex &&
-                currentSpeakingIndex === sentenceIndex,
+                (currentSpeakingGroup === groupIndex &&
+                  currentSpeakingIndex === sentenceIndex) ||
+                (isGroupSpeaking(groupIndex) &&
+                  !isDialogue(group) &&
+                  currentSpeakingIndex === sentenceIndex),
             }"
             @click="speakSentence(sentence.sentence, groupIndex, sentenceIndex)"
             circle>
@@ -72,7 +83,9 @@ import { ArrowLeft, Microphone } from '@element-plus/icons-vue';
 import { getTTSAudio } from '../utils/tts';
 
 const props = defineProps<{
-  sentences: Array<Array<{ sentence: string; description: string }>>;
+  sentences: Array<
+    Array<{ sentence: string; description: string; type?: string }>
+  >;
 }>();
 
 const emit = defineEmits<{
@@ -87,9 +100,10 @@ let currentAudioElement: HTMLAudioElement | null = null;
 
 // 判断是否为对话类型
 const isDialogue = (
-  group: Array<{ sentence: string; description: string }>
+  group: Array<{ sentence: string; description: string; type?: string }>
 ) => {
-  return group.length > 1;
+  // 检查第一个元素的type属性，如果是dialogue则为对话，否则为单句
+  return group[0]?.type === 'dialogue';
 };
 
 // 判断当前组是否正在朗读
@@ -100,11 +114,24 @@ const isGroupSpeaking = (groupIndex: number) => {
   );
 };
 
-// 朗读整个对话
+const isGroupPlaying = (groupIndex: number) => {
+  return (
+    currentSpeakingGroup.value === groupIndex &&
+    currentSpeakingIndex.value !== -1
+  );
+};
+
+// 朗读整个对话或单句组
 const speakDialogue = async (
-  group: Array<{ sentence: string; description: string }>,
+  group: Array<{ sentence: string; description: string; type?: string }>,
   groupIndex: number
 ) => {
+  // 如果当前组正在朗读，则停止朗读
+  if (isGroupPlaying(groupIndex) || isGroupSpeaking(groupIndex)) {
+    stopCurrentAudio();
+    return;
+  }
+
   if (currentSpeakingGroup.value !== -1) return;
 
   try {
@@ -114,6 +141,7 @@ const speakDialogue = async (
     for (const [index, sentence] of group.entries()) {
       if (currentSpeakingGroup.value !== groupIndex) break;
 
+      currentSpeakingIndex.value = index;
       const audioElement = await getTTSAudio(sentence.sentence);
       currentAudioElement = audioElement;
 
@@ -355,6 +383,8 @@ const autoPlayAll = async () => {
   display: flex;
   align-items: center;
   gap: 4px;
+  min-width: 80px;
+  justify-content: center;
 }
 
 .speak-dialogue-btn .speaking-icon {

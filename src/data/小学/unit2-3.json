@@ -1,0 +1,92 @@
+{
+  "name": "Unit 2 知识要点",
+  "description": "句子",
+  "type": "sentence",
+  "words": [
+    {
+      "type": "single",
+      "data": [
+        {
+          "sentence": "It has short legs.",
+          "description": "它有短腿。"
+        },
+        {
+          "sentence": "It has a big body.",
+          "description": "它有大身体"
+        },
+        {
+          "sentence": "It's white.",
+          "description": "它是白色的。"
+        },
+        {
+          "sentence": "Its eyes are big.",
+          "description": "它的眼睛很大。"
+        },
+        {
+          "sentence": "Its nose is small.",
+          "description": "它的鼻子很小。"
+        },
+        {
+          "sentence": "I have a pet.",
+          "description": "我有一只宠物。"
+        },
+        {
+          "sentence": "Ben has a dog.",
+          "description": "Ben有一条狗。"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "Do you have a pet?",
+          "description": "你有一只宠物吗？"
+        },
+        {
+          "sentence": "Yes, I have a dog.",
+          "description": "是的，我有一只狗"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "Do you like dogs?",
+          "description": "你喜欢狗吗？"
+        },
+        {
+          "sentence": "Yes, I do.",
+          "description": "是的"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "Do you often sing and dance?",
+          "description": "你经常唱歌跳舞吗？"
+        },
+        {
+          "sentence": "No, I don't.",
+          "description": "不。"
+        }
+      ]
+    },
+    {
+      "type": "single",
+      "data": [
+        {
+          "sentence": "I often say hello to mum.",
+          "description": "我经常向妈妈问好。"
+        },
+        {
+          "sentence": "I often make a card for dad.",
+          "description": "我经常做卡片给爸爸。"
+        }
+      ]
+    }
+  ]
+}
