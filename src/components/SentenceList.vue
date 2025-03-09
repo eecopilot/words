@@ -8,15 +8,27 @@
         返回
       </el-button>
 
-      <!-- 添加显示模式切换按钮组 -->
-      <div class="display-mode-controls">
-        <el-radio-group
-          v-model="displayMode"
-          size="small">
-          <el-radio-button value="both">英文+中文</el-radio-button>
-          <el-radio-button value="english">仅英文</el-radio-button>
-          <el-radio-button value="chinese">仅中文</el-radio-button>
-        </el-radio-group>
+      <div class="header-controls">
+        <el-button
+          type="primary"
+          size="small"
+          @click="autoPlayAll"
+          class="auto-play-btn">
+          {{
+            isPlaying ? (isPaused ? '继续播放' : '暂停播放') : '自动朗读全部'
+          }}
+        </el-button>
+
+        <!-- 显示模式切换按钮组 -->
+        <div class="display-mode-controls">
+          <el-radio-group
+            v-model="displayMode"
+            size="small">
+            <el-radio-button value="both">英文+中文</el-radio-button>
+            <el-radio-button value="english">仅英文</el-radio-button>
+            <el-radio-button value="chinese">仅中文</el-radio-button>
+          </el-radio-group>
+        </div>
       </div>
     </div>
 
@@ -84,14 +96,6 @@
           </el-button>
         </div>
       </div>
-    </div>
-
-    <div class="control-panel">
-      <el-button
-        type="primary"
-        @click="autoPlayAll">
-        {{ isPlaying ? (isPaused ? '继续播放' : '暂停播放') : '自动朗读全部' }}
-      </el-button>
     </div>
   </div>
 </template>
@@ -330,7 +334,17 @@ const autoPlayAll = async () => {
   gap: 4px;
 }
 
-/* 添加显示模式控制样式 */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.auto-play-btn {
+  white-space: nowrap;
+}
+
+/* 显示模式控制样式 */
 .display-mode-controls {
   display: flex;
   align-items: center;
@@ -389,13 +403,6 @@ const autoPlayAll = async () => {
   transform: scale(1.1);
 }
 
-.control-panel {
-  margin-top: 16px;
-  display: flex;
-  justify-content: center;
-  padding: 16px 0;
-}
-
 .sentence-group-header {
   display: flex;
   justify-content: space-between;
@@ -434,6 +441,7 @@ const autoPlayAll = async () => {
   }
 }
 
+/* 移动端适配 */
 @media (max-width: 768px) {
   .sentence-list-container {
     padding: 12px;
@@ -454,6 +462,16 @@ const autoPlayAll = async () => {
 
   .sentence-description {
     font-size: 13px;
+  }
+
+  .header-controls {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  .auto-play-btn {
+    margin-bottom: 4px;
   }
 }
 </style>

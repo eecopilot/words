@@ -8,14 +8,26 @@
         返回
       </el-button>
 
-      <div class="display-mode-controls">
-        <el-radio-group
-          v-model="displayMode"
-          size="small">
-          <el-radio-button value="both">英文+中文</el-radio-button>
-          <el-radio-button value="english">仅英文</el-radio-button>
-          <el-radio-button value="chinese">仅中文</el-radio-button>
-        </el-radio-group>
+      <div class="header-controls">
+        <el-button
+          type="primary"
+          size="small"
+          @click="autoPlayAll"
+          class="auto-play-btn">
+          {{
+            isPlaying ? (isPaused ? '继续播放' : '暂停播放') : '自动朗读全部'
+          }}
+        </el-button>
+
+        <div class="display-mode-controls">
+          <el-radio-group
+            v-model="displayMode"
+            size="small">
+            <el-radio-button value="both">英文+中文</el-radio-button>
+            <el-radio-button value="english">仅英文</el-radio-button>
+            <el-radio-button value="chinese">仅中文</el-radio-button>
+          </el-radio-group>
+        </div>
       </div>
     </div>
 
@@ -88,14 +100,6 @@
           </el-button>
         </div>
       </template>
-    </div>
-
-    <div class="control-panel">
-      <el-button
-        type="primary"
-        @click="autoPlayAll">
-        {{ isPlaying ? (isPaused ? '继续播放' : '暂停播放') : '自动朗读全部' }}
-      </el-button>
     </div>
   </div>
 </template>
@@ -307,6 +311,16 @@ const autoPlayAll = async () => {
   gap: 4px;
 }
 
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.auto-play-btn {
+  white-space: nowrap;
+}
+
 .display-mode-controls {
   display: flex;
   align-items: center;
@@ -318,6 +332,7 @@ const autoPlayAll = async () => {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  margin-bottom: 16px;
 }
 
 .list-section-header {
@@ -385,9 +400,10 @@ const autoPlayAll = async () => {
   transform: scale(1.1);
 }
 
-.control-panel {
-  margin-top: 16px;
-  display: flex;
-  justify-content: center;
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .header-controls {
+    gap: 8px;
+  }
 }
 </style>

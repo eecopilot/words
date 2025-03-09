@@ -368,7 +368,9 @@ const totalWords = computed(() => {
     // 计算基础单词数量
     const wordsCount = unit.words?.length || 0;
     // 计算进阶单词数量
-    const starsCount = unit.stars?.length || 0;
+    // @ts-ignore
+    const starsCount =
+      unit.type === 'unit' && unit.stars ? unit.stars.length : 0;
     // 返回总和
     return sum + wordsCount + starsCount;
   }, 0);
@@ -399,7 +401,7 @@ const allWords = computed(() => {
           }
           return [];
         });
-        words.push(...processedWords);
+        words.push(...processedWords.flat());
       } else {
         // 为每个单词添加所有者信息
         const unitsWords = unit.words.map((word: any) => ({
@@ -409,7 +411,9 @@ const allWords = computed(() => {
         words.push(...unitsWords);
 
         // 如果有进阶单词，也添加到列表中
-        if (unit.stars && unit.stars.length > 0) {
+        // @ts-ignore - unit.stars 在类型定义中不存在，但在实际数据中存在
+        if (unit.type === 'unit' && unit.stars && unit.stars.length > 0) {
+          // @ts-ignore
           const starWords = unit.stars.map((word: any) => ({
             ...word,
             owner: unit.owner,
@@ -420,6 +424,7 @@ const allWords = computed(() => {
       }
     }
   });
+
   // 只在背诵模式下且不是句子类型时随机打乱单词顺序
   if (isReciting.value && !isSentenceType.value) {
     return words.sort(() => Math.random() - 0.5);
@@ -526,7 +531,9 @@ const learningStats = computed(() => {
         });
 
         // 统计进阶单词
-        if (unit.stars && Array.isArray(unit.stars)) {
+        // @ts-ignore
+        if (unit.type === 'unit' && unit.stars && unit.stars.length > 0) {
+          // @ts-ignore
           unit.stars.forEach((word: any) => {
             const wordKey = `${currentFolder.value}-${word.name}`;
             const wordProgress = progress[wordKey] || 0;
