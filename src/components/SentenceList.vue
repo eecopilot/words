@@ -3,6 +3,7 @@
     <div class="header">
       <el-button
         @click="handleBack"
+        size="small"
         class="back-btn">
         <el-icon><ArrowLeft /></el-icon>
         返回
@@ -14,9 +15,7 @@
           size="small"
           @click="autoPlayAll"
           class="auto-play-btn">
-          {{
-            isPlaying ? (isPaused ? '继续播放' : '暂停播放') : '自动朗读全部'
-          }}
+          {{ isPlaying ? (isPaused ? '继续播放' : '暂停播放') : '自动朗读' }}
         </el-button>
 
         <!-- 显示模式切换按钮组 -->
@@ -24,7 +23,7 @@
           <el-radio-group
             v-model="displayMode"
             size="small">
-            <el-radio-button value="both">英文+中文</el-radio-button>
+            <el-radio-button value="both">英+中</el-radio-button>
             <el-radio-button value="english">仅英文</el-radio-button>
             <el-radio-button value="chinese">仅中文</el-radio-button>
           </el-radio-group>
