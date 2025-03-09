@@ -13,9 +13,9 @@
         <el-radio-group
           v-model="displayMode"
           size="small">
-          <el-radio-button label="both">英文+中文</el-radio-button>
-          <el-radio-button label="english">仅英文</el-radio-button>
-          <el-radio-button label="chinese">仅中文</el-radio-button>
+          <el-radio-button value="both">英文+中文</el-radio-button>
+          <el-radio-button value="english">仅英文</el-radio-button>
+          <el-radio-button value="chinese">仅中文</el-radio-button>
         </el-radio-group>
       </div>
     </div>

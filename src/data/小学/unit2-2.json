@@ -82,7 +82,9 @@
     {
       "name": "neck",
       "description": "脖子"
-    },
+    }
+  ],
+  "stars": [
     {
       "name": "hair",
       "description": "头发"

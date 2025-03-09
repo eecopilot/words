@@ -106,7 +106,9 @@
     {
       "name": "pet",
       "description": "宠物"
-    },
+    }
+  ],
+  "stars": [
     {
       "name": "his",
       "description": "他的"

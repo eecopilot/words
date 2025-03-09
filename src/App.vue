@@ -364,7 +364,14 @@ const toggleUnit = (unit: any) => {
 
 // 计算选中单元的总单词数
 const totalWords = computed(() => {
-  return selectedUnits.value.reduce((sum, unit) => sum + unit.words.length, 0);
+  return selectedUnits.value.reduce((sum, unit) => {
+    // 计算基础单词数量
+    const wordsCount = unit.words?.length || 0;
+    // 计算进阶单词数量
+    const starsCount = unit.stars?.length || 0;
+    // 返回总和
+    return sum + wordsCount + starsCount;
+  }, 0);
 });
 
 // 背诵模式状态
@@ -400,6 +407,16 @@ const allWords = computed(() => {
           owner: unit.owner,
         }));
         words.push(...unitsWords);
+
+        // 如果有进阶单词，也添加到列表中
+        if (unit.stars && unit.stars.length > 0) {
+          const starWords = unit.stars.map((word: any) => ({
+            ...word,
+            owner: unit.owner,
+            type: 'star', // 标记为进阶单词
+          }));
+          words.push(...starWords);
+        }
       }
     }
   });
@@ -507,6 +524,17 @@ const learningStats = computed(() => {
           if (wordProgress > 0) stats.learnedWords++;
           if (wordProgress >= 5) stats.masteredWords++;
         });
+
+        // 统计进阶单词
+        if (unit.stars && Array.isArray(unit.stars)) {
+          unit.stars.forEach((word: any) => {
+            const wordKey = `${currentFolder.value}-${word.name}`;
+            const wordProgress = progress[wordKey] || 0;
+            stats.totalWords++;
+            if (wordProgress > 0) stats.learnedWords++;
+            if (wordProgress >= 5) stats.masteredWords++;
+          });
+        }
       }
     });
   }

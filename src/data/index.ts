@@ -19,6 +19,7 @@ interface BaseUnit {
 interface WordUnit extends BaseUnit {
   type: 'word';
   words: WordItem[];
+  stars?: WordItem[];
 }
 
 interface SentenceUnit extends BaseUnit {
