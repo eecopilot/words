@@ -83,14 +83,6 @@
           <p>{{ unit.description }}</p>
           <div class="word-count">单词数量: {{ unit.words?.length || 0 }}</div>
         </div>
-        <!-- <div
-          class="unit-card"
-          v-for="unit in currentUnits"
-          :key="unit.name">
-          <div class="card-header">测试</div>
-          <p>测试</p>
-          <div class="word-count">单词数量: 100</div>
-        </div> -->
       </div>
 
       <!-- 在模板中显示统计信息 -->
@@ -177,7 +169,7 @@ import { ElMessage, ElMessageBox } from 'element-plus';
 import { Delete, CircleCheck, Loading } from '@element-plus/icons-vue';
 import { wrongWordsManager } from './utils/wrongWords';
 import { getFolders, getFolderUnits } from './data';
-import type { Unit } from './data';
+import type { Unit, LearningStats } from './types';
 
 // 改为本地状态管理
 const wordUnits = ref<Unit[]>([]);
@@ -190,7 +182,7 @@ const folders = computed(() => getFolders());
 const currentFolder = ref('');
 
 // 已选择的单元
-const selectedUnits = ref<any[]>([]);
+const selectedUnits = ref<Unit[]>([]);
 
 // 自动选择第一个文件夹
 watchEffect(() => {
@@ -307,7 +299,7 @@ const currentUnits = computed(() => {
 });
 
 // 切换单元选择状态
-const toggleUnit = (unit: any) => {
+const toggleUnit = (unit: Unit) => {
   // 如果是错误单词本
   if (unit.type === 'wrong-words') {
     // 如果已经选中了其他单元，不允许选择错误单词本
@@ -368,9 +360,7 @@ const totalWords = computed(() => {
     // 计算基础单词数量
     const wordsCount = unit.words?.length || 0;
     // 计算进阶单词数量
-    // @ts-ignore
-    const starsCount =
-      unit.type === 'unit' && unit.stars ? unit.stars.length : 0;
+    const starsCount = unit.stars ? unit.stars.length : 0;
     // 返回总和
     return sum + wordsCount + starsCount;
   }, 0);
@@ -386,22 +376,33 @@ const isReading = ref(false);
 const allWords = computed(() => {
   const words: any[] = [];
   selectedUnits.value.forEach((unit) => {
+    console.log('Processing unit:', unit.name, 'Type:', unit.type);
     // 确保 unit.words 存在且不为空
     if (unit.words && unit.words.length > 0) {
       if (unit.type === 'sentence') {
-        // 对于句子类型，根据type分组处理
-        const processedWords = unit.words.map((word: any) => {
+        console.log('Processing sentence unit:', unit.words);
+        // 对于句子类型，我们需要返回一个二维数组
+        // 每个内部数组代表一个句子组（对话或单句）
+        unit.words.forEach((word: any) => {
+          console.log('Processing sentence word:', word);
           if (word.type === 'dialogue') {
-            return word.data.map((item: any) => ({
+            // 对话类型，将整个data数组作为一个组
+            const dialogueGroup = word.data.map((item: any) => ({
               ...item,
               type: 'dialogue',
             }));
+            words.push(dialogueGroup);
           } else if (word.type === 'single') {
-            return word.data.map((item: any) => ({ ...item, type: 'single' }));
+            // 单句类型，将整个data数组作为一个组
+            const singleGroup = word.data.map((item: any) => ({
+              ...item,
+              type: 'single',
+            }));
+            words.push(singleGroup);
           }
-          return [];
         });
-        words.push(...processedWords.flat());
+
+        console.log('Processed sentence words (groups):', words);
       } else {
         // 为每个单词添加所有者信息
         const unitsWords = unit.words.map((word: any) => ({
@@ -411,9 +412,7 @@ const allWords = computed(() => {
         words.push(...unitsWords);
 
         // 如果有进阶单词，也添加到列表中
-        // @ts-ignore - unit.stars 在类型定义中不存在，但在实际数据中存在
-        if (unit.type === 'unit' && unit.stars && unit.stars.length > 0) {
-          // @ts-ignore
+        if (unit.stars && unit.stars.length > 0) {
           const starWords = unit.stars.map((word: any) => ({
             ...word,
             owner: unit.owner,
@@ -424,6 +423,9 @@ const allWords = computed(() => {
       }
     }
   });
+
+  console.log('Final words array:', words);
+  console.log('Is sentence type:', isSentenceType.value);
 
   // 只在背诵模式下且不是句子类型时随机打乱单词顺序
   if (isReciting.value && !isSentenceType.value) {
@@ -470,14 +472,14 @@ const startReciting = () => {
 };
 
 // 检查单元是否完成（100%正确率）
-const isUnitCompleted = (unit: any) => {
+const isUnitCompleted = (unit: Unit) => {
   if (unit.type === 'wrong-words') return false;
   const completionKey = `completion-${unit.owner}-${unit.name}`;
   return localStorage.getItem(completionKey) === 'true';
 };
 
 // 更新单元完成状态
-const updateUnitCompletion = (unit: any, isCompleted: boolean) => {
+const updateUnitCompletion = (unit: Unit, isCompleted: boolean) => {
   const completionKey = `completion-${unit.owner}-${unit.name}`;
   if (isCompleted) {
     localStorage.setItem(completionKey, 'true');
@@ -506,9 +508,9 @@ const openWrongWordsDrawer = () => {
 };
 
 // 添加新的计算属性
-const learningStats = computed(() => {
+const learningStats = computed<LearningStats>(() => {
   const progress = JSON.parse(localStorage.getItem('wordProgress') || '{}');
-  const stats = {
+  const stats: LearningStats = {
     totalWords: 0,
     learnedWords: 0,
     masteredWords: 0,
@@ -531,9 +533,7 @@ const learningStats = computed(() => {
         });
 
         // 统计进阶单词
-        // @ts-ignore
-        if (unit.type === 'unit' && unit.stars && unit.stars.length > 0) {
-          // @ts-ignore
+        if (unit.stars && unit.stars.length > 0) {
           unit.stars.forEach((word: any) => {
             const wordKey = `${currentFolder.value}-${word.name}`;
             const wordProgress = progress[wordKey] || 0;

@@ -1,44 +1,4 @@
-// 定义单词数据的类型
-interface WordItem {
-  name: string;
-  description: string;
-}
-
-interface SentenceData {
-  sentence: string;
-  description: string;
-}
-
-interface BaseUnit {
-  name: string;
-  description: string;
-  type: 'word' | 'sentence' | 'wrong-words';
-  owner: string;
-}
-
-interface WordUnit extends BaseUnit {
-  type: 'word';
-  words: WordItem[];
-  stars?: WordItem[];
-}
-
-interface SentenceUnit extends BaseUnit {
-  type: 'sentence';
-  words: {
-    type: string;
-    data: SentenceData[];
-  }[];
-}
-
-interface WrongWordsUnit extends BaseUnit {
-  type: 'wrong-words';
-  words: WordItem[];
-}
-
-export type Unit = WordUnit | SentenceUnit | WrongWordsUnit;
-
-// 使用 Record 类型来定义 wordData 的类型
-type WordData = Record<string, Unit[]>;
+import type { Unit, WordData } from '../types';
 
 // 自动导入所有 JSON 文件
 const modules = import.meta.glob<{ default: Unit }>('./*/unit*.json', {

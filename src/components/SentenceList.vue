@@ -187,7 +187,7 @@ const speakDialogue = async (
       }
     }
   } catch (error) {
-    console.error('播放对话错误:', error);
+    // 移除console.error
   } finally {
     currentSpeakingGroup.value = -1;
     currentSpeakingIndex.value = -1;
@@ -236,7 +236,7 @@ const speakSentence = async (
 
     await audioElement.play();
   } catch (error) {
-    console.error('播放错误:', error);
+    // 移除console.error
     currentSpeakingGroup.value = -1;
     currentSpeakingIndex.value = -1;
     currentAudioElement = null;
@@ -291,7 +291,7 @@ const autoPlayAll = async () => {
               await new Promise((resolve) => setTimeout(resolve, 100));
             }
           } catch (error) {
-            console.error('播放错误:', error);
+            // 移除console.error
             currentSpeakingGroup.value = -1;
             currentSpeakingIndex.value = -1;
             currentAudioElement = null;
@@ -304,7 +304,7 @@ const autoPlayAll = async () => {
       }
     }
   } catch (error) {
-    console.error('自动朗读错误:', error);
+    // 移除console.error
   } finally {
     stopCurrentAudio();
   }
@@ -356,6 +356,7 @@ const autoPlayAll = async () => {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  margin-bottom: 20px;
 }
 
 .sentence-group {
@@ -447,6 +448,34 @@ const autoPlayAll = async () => {
     padding: 12px;
   }
 
+  .header {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px; /* 增加底部间距 */
+  }
+
+  .back-btn {
+    margin-right: auto; /* 让返回按钮靠左 */
+  }
+
+  .header-controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px; /* 增加间距 */
+    flex-wrap: wrap;
+  }
+
+  .auto-play-btn {
+    font-size: 13px; /* 稍微减小字体大小 */
+    padding: 8px 12px; /* 调整内边距 */
+  }
+
+  .display-mode-controls .el-radio-button {
+    font-size: 13px; /* 减小按钮组字体大小 */
+  }
+
   .sentence-group {
     padding: 12px;
     gap: 12px;
@@ -462,16 +491,6 @@ const autoPlayAll = async () => {
 
   .sentence-description {
     font-size: 13px;
-  }
-
-  .header-controls {
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 8px;
-  }
-
-  .auto-play-btn {
-    margin-bottom: 4px;
   }
 }
 </style>
