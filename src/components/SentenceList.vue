@@ -7,6 +7,17 @@
         <el-icon><ArrowLeft /></el-icon>
         返回
       </el-button>
+
+      <!-- 添加显示模式切换按钮组 -->
+      <div class="display-mode-controls">
+        <el-radio-group
+          v-model="displayMode"
+          size="small">
+          <el-radio-button label="both">英文+中文</el-radio-button>
+          <el-radio-button label="english">仅英文</el-radio-button>
+          <el-radio-button label="chinese">仅中文</el-radio-button>
+        </el-radio-group>
+      </div>
     </div>
 
     <div class="sentence-list">
@@ -46,8 +57,16 @@
           :key="sentenceIndex"
           class="sentence-item">
           <div class="sentence-content">
-            <div class="sentence-text">{{ sentence.sentence }}</div>
-            <div class="sentence-description">{{ sentence.description }}</div>
+            <div
+              v-if="displayMode !== 'chinese'"
+              class="sentence-text">
+              {{ sentence.sentence }}
+            </div>
+            <div
+              v-if="displayMode !== 'english'"
+              class="sentence-description">
+              {{ sentence.description }}
+            </div>
           </div>
           <el-button
             class="speak-btn"
@@ -91,6 +110,9 @@ const props = defineProps<{
 const emit = defineEmits<{
   back: [];
 }>();
+
+// 添加显示模式状态
+const displayMode = ref('both'); // 'both', 'english', 'chinese'
 
 const currentSpeakingGroup = ref(-1);
 const currentSpeakingIndex = ref(-1);
@@ -297,12 +319,21 @@ const autoPlayAll = async () => {
 
 .header {
   margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .back-btn {
   display: flex;
   align-items: center;
   gap: 4px;
+}
+
+/* 添加显示模式控制样式 */
+.display-mode-controls {
+  display: flex;
+  align-items: center;
 }
 
 .sentence-list {

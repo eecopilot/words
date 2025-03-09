@@ -7,6 +7,16 @@
         <el-icon><ArrowLeft /></el-icon>
         返回
       </el-button>
+
+      <div class="display-mode-controls">
+        <el-radio-group
+          v-model="displayMode"
+          size="small">
+          <el-radio-button label="both">英文+中文</el-radio-button>
+          <el-radio-button label="english">仅英文</el-radio-button>
+          <el-radio-button label="chinese">仅中文</el-radio-button>
+        </el-radio-group>
+      </div>
     </div>
 
     <div class="word-list">
@@ -16,8 +26,16 @@
         class="word-item">
         <div class="word-content">
           <span class="word-index">{{ index + 1 }}.</span>
-          <span class="word-name">{{ word.name }}</span>
-          <span class="word-description">{{ word.description }}</span>
+          <span
+            v-if="displayMode !== 'chinese'"
+            class="word-name"
+            >{{ word.name }}</span
+          >
+          <span
+            v-if="displayMode !== 'english'"
+            class="word-description"
+            >{{ word.description }}</span
+          >
         </div>
         <el-button
           class="speak-btn"
@@ -51,6 +69,8 @@ const props = defineProps<{
 const emit = defineEmits<{
   back: [];
 }>();
+
+const displayMode = ref('both');
 
 const currentSpeakingIndex = ref(-1);
 const isPlaying = ref(false);
@@ -172,12 +192,20 @@ const autoPlayAll = async () => {
 
 .header {
   margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .back-btn {
   display: flex;
   align-items: center;
   gap: 4px;
+}
+
+.display-mode-controls {
+  display: flex;
+  align-items: center;
 }
 
 .word-list {
