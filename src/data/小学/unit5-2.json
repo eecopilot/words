@@ -1,0 +1,73 @@
+{
+  "name": "Unit5 知识要点",
+  "description": "B类单词",
+  "type": "unit",
+  "words": [
+    {
+      "name": "tiger",
+      "description": "老虎"
+    },
+    {
+      "name": "for",
+      "description": "给, 为了"
+    },
+    {
+      "name": "arm",
+      "description": "手臂"
+    },
+    {
+      "name": "them",
+      "description": "它们 (宾格)"
+    },
+    {
+      "name": "doll's",
+      "description": "洋娃娃的"
+    },
+    {
+      "name": "now",
+      "description": "现在"
+    },
+    {
+      "name": "up",
+      "description": "向上"
+    },
+    {
+      "name": "down",
+      "description": "向下"
+    },
+    {
+      "name": "sit down",
+      "description": "坐下"
+    }
+  ],
+  "stars": [
+    {
+      "name": "still",
+      "description": "仍然"
+    },
+    {
+      "name": "robot",
+      "description": "机器人"
+    },
+    {
+      "name": "around",
+      "description": "环绕"
+    },
+    {
+      "name": "talk",
+      "description": "说话"
+    },
+    {
+      "name": "work",
+      "description": "工作"
+    },
+    {
+      "name": "also",
+      "description": "也"
+    },
+    {
+      "name": "light",
+      "description": "灯"
+    }
+  ]
+}

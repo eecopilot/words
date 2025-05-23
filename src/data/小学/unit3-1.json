@@ -1,0 +1,242 @@
+{
+  "name": "Unit 3-4 知识要点",
+  "description": "A类单词",
+  "type": "unit",
+  "words": [
+    {
+      "name": "noodels",
+      "description": "面条"
+    },
+    {
+      "name": "egg",
+      "description": "鸡蛋"
+    },
+    {
+      "name": "cake",
+      "description": "蛋糕"
+    },
+    {
+      "name": "juice",
+      "description": "果汁"
+    },
+    {
+      "name": "bread",
+      "description": "面包"
+    },
+    {
+      "name": "milk",
+      "description": "牛奶"
+    },
+    {
+      "name": "soup",
+      "description": "汤"
+    },
+    {
+      "name": "rice",
+      "description": "米饭"
+    },
+    {
+      "name": "fruit",
+      "description": "水果"
+    },
+    {
+      "name": "vegetables",
+      "description": "蔬菜"
+    },
+    {
+      "name": "meat",
+      "description": "肉"
+    },
+    {
+      "name": "Would you like",
+      "description": "你想吃...吗?"
+    },
+    {
+      "name": "I'd like",
+      "description": "我想吃"
+    },
+    {
+      "name": "some",
+      "description": "一些"
+    },
+    {
+      "name": "have",
+      "description": "吃, 喝, 有"
+    },
+    {
+      "name": "eat",
+      "description": "吃"
+    },
+    {
+      "name": "food",
+      "description": "食物"
+    },
+    {
+      "name": "healthy",
+      "description": "健康"
+    },
+    {
+      "name": "unhealthy",
+      "description": "不健康"
+    },
+    {
+      "name": "eraser",
+      "description": "橡皮"
+    },
+    {
+      "name": "ruler",
+      "description": "尺子"
+    },
+    {
+      "name": "pen",
+      "description": "钢笔"
+    },
+    {
+      "name": "book",
+      "description": "书"
+    },
+    {
+      "name": "pencil",
+      "description": "铅笔"
+    },
+    {
+      "name": "bag",
+      "description": "书包"
+    },
+    {
+      "name": "paper",
+      "description": "纸"
+    },
+    {
+      "name": "use",
+      "description": "用"
+    },
+    {
+      "name": "see",
+      "description": "看见"
+    },
+    {
+      "name": "smell",
+      "description": "闻"
+    },
+    {
+      "name": "taste",
+      "description": "尝"
+    },
+    {
+      "name": "hear",
+      "description": "听"
+    },
+    {
+      "name": "touch",
+      "description": "摸"
+    },
+    {
+      "name": "with",
+      "description": "用"
+    },
+    {
+      "name": "nose",
+      "description": "鼻子"
+    },
+    {
+      "name": "this",
+      "description": "这"
+    },
+    {
+      "name": "these",
+      "description": "这些"
+    },
+    {
+      "name": "Here you are.",
+      "description": "给你"
+    },
+    {
+      "name": "sure",
+      "description": "当然可以"
+    },
+    {
+      "name": "can",
+      "description": "能"
+    },
+    {
+      "name": "can't",
+      "description": "不能"
+    },
+    {
+      "name": "need",
+      "description": "需要"
+    },
+    {
+      "name": "good",
+      "description": "好"
+    },
+    {
+      "name": "learn",
+      "description": "学习"
+    },
+    {
+      "name": "find",
+      "description": "找到"
+    },
+    {
+      "name": "they",
+      "description": "他们"
+    },
+    {
+      "name": "are",
+      "description": "是"
+    },
+    {
+      "name": "They're=They are",
+      "description": "他们是"
+    },
+    {
+      "name": "share",
+      "description": "分享"
+    },
+    {
+      "name": "What about = How about",
+      "description": "...怎么样?"
+    },
+    {
+      "name": "yummy",
+      "description": "美味的"
+    },
+    {
+      "name": "but",
+      "description": "但是"
+    },
+    {
+      "name": "put",
+      "description": "放"
+    },
+    {
+      "name": "cut",
+      "description": "切"
+    },
+    {
+      "name": "write",
+      "description": "写"
+    }
+  ],
+  "stars": [
+    {
+      "name": "No problem.",
+      "description": "没问题"
+    },
+
+    {
+      "name": "read",
+      "description": "读"
+    },
+    {
+      "name": "drink",
+      "description": "喝"
+    },
+    {
+      "name": "bad",
+      "description": "坏"
+    }
+  ]
+}

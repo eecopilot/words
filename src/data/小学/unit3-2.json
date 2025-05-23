@@ -1,0 +1,153 @@
+{
+  "name": "Unit 3-4 知识要点",
+  "description": "B类单词",
+  "type": "unit",
+  "words": [
+    {
+      "name": "tongue",
+      "description": "舌头"
+    },
+    {
+      "name": "Excuse me.",
+      "description": "劳驾"
+    },
+    {
+      "name": "draw a line",
+      "description": "画线"
+    },
+    {
+      "name": "breakfast",
+      "description": "早餐"
+    },
+    {
+      "name": "time",
+      "description": "时间"
+    },
+    {
+      "name": "same",
+      "description": "相同"
+    },
+    {
+      "name": "do the same",
+      "description": "做相同的事"
+    },
+    {
+      "name": "plate",
+      "description": "盘子"
+    },
+    {
+      "name": "class",
+      "description": "班级"
+    },
+    {
+      "name": "in",
+      "description": "在课堂"
+    },
+    {
+      "name": "computer",
+      "description": "电脑"
+    },
+    {
+      "name": "every day",
+      "description": "每天"
+    },
+    {
+      "name": "too much",
+      "description": "太多"
+    },
+    {
+      "name": "candy",
+      "description": "糖果"
+    },
+    {
+      "name": "more",
+      "description": "更多"
+    },
+    {
+      "name": "sun",
+      "description": "太阳"
+    },
+    {
+      "name": "grape",
+      "description": "葡萄"
+    },
+    {
+      "name": "duck",
+      "description": "鸭子"
+    },
+    {
+      "name": "song",
+      "description": "歌曲"
+    },
+    {
+      "name": "school",
+      "description": "学校"
+    },
+    {
+      "name": "exercise",
+      "description": "锻炼"
+    },
+    {
+      "name": "junk food",
+      "description": "垃圾食品"
+    },
+    {
+      "name": "grass",
+      "description": "草"
+    },
+    {
+      "name": "sky",
+      "description": "天空"
+    },
+    {
+      "name": "bee",
+      "description": "蜜蜂"
+    },
+    {
+      "name": "map",
+      "description": "地图"
+    }
+  ],
+  "stars": [
+    {
+      "name": "spring",
+      "description": "春天"
+    },
+    {
+      "name": "feel",
+      "description": "感觉"
+    },
+    {
+      "name": "peel",
+      "description": "果皮"
+    },
+    {
+      "name": "sound",
+      "description": "声音"
+    },
+    {
+      "name": "speak",
+      "description": "说"
+    },
+    {
+      "name": "eagle",
+      "description": "老鹰"
+    },
+    {
+      "name": "tool",
+      "description": "工具"
+    },
+    {
+      "name": "colorful",
+      "description": "多彩的"
+    },
+    {
+      "name": "less",
+      "description": "更少"
+    },
+    {
+      "name": "also",
+      "description": "也"
+    }
+  ]
+}

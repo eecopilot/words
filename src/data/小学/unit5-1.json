@@ -1,0 +1,165 @@
+{
+  "name": "Unit5 知识要点",
+  "description": "A类单词",
+  "type": "unit",
+  "words": [
+    {
+      "name": "where",
+      "description": "哪里"
+    },
+    {
+      "name": "boat",
+      "description": "船"
+    },
+    {
+      "name": "ball",
+      "description": "球"
+    },
+    {
+      "name": "all",
+      "description": "所有, 都"
+    },
+    {
+      "name": "doll",
+      "description": "洋娃娃"
+    },
+    {
+      "name": "car",
+      "description": "小汽车"
+    },
+    {
+      "name": "on",
+      "description": "在上面"
+    },
+    {
+      "name": "in",
+      "description": "在里面"
+    },
+    {
+      "name": "under",
+      "description": "在下面"
+    },
+    {
+      "name": "cap",
+      "description": "帽子"
+    },
+    {
+      "name": "map",
+      "description": "地图"
+    },
+    {
+      "name": "old",
+      "description": "旧, 老"
+    },
+    {
+      "name": "box",
+      "description": "盒子"
+    },
+    {
+      "name": "toy",
+      "description": "玩具"
+    },
+    {
+      "name": "have /has",
+      "description": "有"
+    },
+    {
+      "name": "at home",
+      "description": "在家"
+    },
+    {
+      "name": "at school",
+      "description": "在学校"
+    },
+    {
+      "name": "many",
+      "description": "许多"
+    },
+    {
+      "name": "any",
+      "description": "一些"
+    },
+    {
+      "name": "shelf",
+      "description": "架子"
+    },
+    {
+      "name": "pencil box",
+      "description": "笔盒"
+    },
+    {
+      "name": "book",
+      "description": "书"
+    },
+    {
+      "name": "ruler",
+      "description": "尺子"
+    },
+    {
+      "name": "thing",
+      "description": "东西"
+    },
+    {
+      "name": "use",
+      "description": "用"
+    },
+    {
+      "name": "help",
+      "description": "帮助"
+    },
+    {
+      "name": "need",
+      "description": "需要"
+    }
+  ],
+  "stars": [
+    {
+      "name": "wall",
+      "description": "墙"
+    },
+    {
+      "name": "cool",
+      "description": "酷"
+    },
+    {
+      "name": "nice",
+      "description": "好的, 漂亮的"
+    },
+    {
+      "name": "keep",
+      "description": "保留"
+    },
+    {
+      "name": "animal",
+      "description": "动物"
+    },
+    {
+      "name": "so",
+      "description": "如此"
+    },
+    {
+      "name": "that",
+      "description": "那"
+    },
+    {
+      "name": "right",
+      "description": "正确, 对"
+    },
+    {
+      "name": "on the wall",
+      "description": "在墙上"
+    },
+    {
+      "name": "how about",
+      "description": "怎样"
+    },
+    {
+      "name": "look at",
+      "description": "看"
+    },
+    {
+      "name": "foot",
+      "description": "脚"
+    }
+  ]
+}

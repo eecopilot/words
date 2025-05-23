@@ -1,0 +1,244 @@
+{
+  "name": "Unit 3-4 知识要点",
+  "description": "句子",
+  "type": "sentence",
+  "words": [
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "Would you like some eggs?",
+          "description": "你想吃一些鸡蛋吗？"
+        },
+        {
+          "sentence": "Yes, please.",
+          "description": "好的，谢谢！"
+        },
+        {
+          "sentence": "Here you are.",
+          "description": "给你。"
+        },
+        {
+          "sentence": "Have some milk, too.They're good.",
+          "description": "也喝一些牛奶。它们很好。"
+        },
+        {
+          "sentence": "Thanks.",
+          "description": "谢谢。"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "What would you like to eat?",
+          "description": "你想吃什么？"
+        },
+        {
+          "sentence": "I'd like some bread.",
+          "description": "我想吃面包。"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "What helps you learn?",
+          "description": "什么帮助你学习？"
+        },
+        {
+          "sentence": "I can smell with my nose.",
+          "description": "我能用鼻子闻。"
+        },
+        {
+          "sentence": "I can touch with my hands.",
+          "description": "我能用手摸。"
+        },
+        {
+          "sentence": "I can taste with my tongue.",
+          "description": "我能用舌头尝。"
+        },
+        {
+          "sentence": "I can see with my eyes.",
+          "description": "我能用眼睛看。"
+        },
+        {
+          "sentence": "I can hear with my ears.",
+          "description": "我能用耳朵听。"
+        },
+        {
+          "sentence": "I can use pen,pencil and books to learn.",
+          "description": "我能用钢笔、铅笔和书去学习。"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "Excuse me. Can I use your eraser, please?",
+          "description": "劳驾，请问我能用你的橡皮吗？"
+        },
+        {
+          "sentence": "Sure. Here you are.",
+          "description": "当然可以，给你。"
+        },
+        {
+          "sentence": "Thank you.",
+          "description": "谢谢！"
+        },
+        {
+          "sentence": "You are welcome.",
+          "description": "不客气。"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "I can't find my ruler. Can I use your ruler?",
+          "description": "我找不到我的尺子。我能用你的尺子吗？"
+        },
+        {
+          "sentence": "No problem.",
+          "description": "没问题。"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "What's this?",
+          "description": "这是什么？"
+        },
+        {
+          "sentence": "It's a pencil.",
+          "description": "这是铅笔。"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "What are these?",
+          "description": "这些是什么？"
+        },
+        {
+          "sentence": "They're books.",
+          "description": "这些是书。"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "Would you like some rice?",
+          "description": "你想吃米饭吗？"
+        },
+        {
+          "sentence": "No, thank you.",
+          "description": "不，谢谢！"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "How about soup?",
+          "description": "汤怎么样？"
+        },
+        {
+          "sentence": "Yes, please. I'd like soup.",
+          "description": "好的，谢谢！我喜欢汤。"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "Take an orange.",
+          "description": "吃一个橘子。"
+        },
+        {
+          "sentence": "Have some milk.",
+          "description": "吃一些牛奶。"
+        },
+        {
+          "sentence": "Have some eggs.",
+          "description": "吃一些鸡蛋。"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "What about you?",
+          "description": "你呢？"
+        },
+        {
+          "sentence": "How about eggs?",
+          "description": "鸡蛋怎样？"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "We are healthy. What do we need?",
+          "description": "我们很健康。我们需要什么？"
+        },
+        {
+          "sentence": "Vegetables, meet, rice and fruit.",
+          "description": "蔬菜，肉，米饭和水果。"
+        }
+      ]
+    },
+    {
+      "type": "single",
+      "data": [
+        {
+          "sentence": "Write with your pencil.",
+          "description": "用铅笔写。"
+        },
+        {
+          "sentence": "Draw a line with your ruler.",
+          "description": "用尺子画线。"
+        },
+        {
+          "sentence": "Put the pen in your pencil box.",
+          "description": "把钢笔放在笔盒里。"
+        },
+        {
+          "sentence": "Read your book.",
+          "description": "读书。"
+        },
+        {
+          "sentence": "Eat less junk food.",
+          "description": "吃少点垃圾食品。"
+        },
+        {
+          "sentence": "Rice and noodles are good.",
+          "description": "米饭和面条很好。"
+        },
+        {
+          "sentence": "Fruit and vegetables are healthy.",
+          "description": "水果和蔬菜很健康。"
+        },
+        {
+          "sentence": "This is my healthy plate for breakfast.",
+          "description": "这是我的早餐健康盘。"
+        }
+      ]
+    }
+  ]
+}
