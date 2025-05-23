@@ -1,0 +1,161 @@
+{
+  "name": "Unit6 句子",
+  "description": "句子",
+  "type": "sentence",
+  "words": [
+    {
+      "type": "dialogue",
+      "data": [
+        { "sentence": "What time is it?", "description": "什么时间了？" },
+        { "sentence": "It's seven o'clock.", "description": "7点了。" }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "How many books do we have?",
+          "description": "我们有多少本书？"
+        },
+        {
+          "sentence": "We have fifteen books.",
+          "description": "我们有15本书。"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "How many apples do we have now?",
+          "description": "我们现在有多少个苹果？"
+        },
+        { "sentence": "We have five apples.", "description": "我们有5个苹果。" }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "How many boxes do we need?",
+          "description": "我们需要多少个盒子？"
+        },
+        {
+          "sentence": "We need three boxes.",
+          "description": "我们需要3个盒子。"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "How much is this boat?",
+          "description": "这艘船多少钱？"
+        },
+        { "sentence": "It's twenty yuan.", "description": "20元。" }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "How much are the rulers?",
+          "description": "这些尺子多少钱？"
+        },
+        { "sentence": "They are six yuan.", "description": "6元。" }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "The books are nine yuan.",
+          "description": "这些书9元。"
+        },
+        {
+          "sentence": "I'll take three for my family.",
+          "description": "我要为我家买三本。"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "How much is each book?",
+          "description": "每一本书多少钱？"
+        },
+        { "sentence": "It's three yuan.", "description": "三元。" }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "data": [
+        {
+          "sentence": "Three yuan for each book.",
+          "description": "每本书3元。"
+        },
+        {
+          "sentence": "I pay fifteen yuan for five books.",
+          "description": "我支付15元买5本书。"
+        }
+      ]
+    },
+    {
+      "type": "single",
+      "data": [
+        { "sentence": "I spend five yuan.", "description": "我花费了5元。" }
+      ]
+    },
+    {
+      "type": "single",
+      "data": [
+        {
+          "sentence": "I put two yuan back in my piggy bank.",
+          "description": "我放回2元到我的猪形储钱罐。"
+        }
+      ]
+    },
+    {
+      "type": "single",
+      "data": [{ "sentence": "Sounds fun!", "description": "听起来很有趣！" }]
+    },
+    {
+      "type": "single",
+      "data": [
+        { "sentence": "Three fives are fifteen.", "description": "三五十五." }
+      ]
+    },
+    {
+      "type": "single",
+      "data": [
+        {
+          "sentence": "A: How much is this book?",
+          "description": "这本书多少钱？"
+        },
+        { "sentence": "B: It's six yuan.", "description": "6元。" },
+        {
+          "sentence": "How about two for ten yuan?",
+          "description": "10元两本怎样？"
+        },
+        { "sentence": "B: OK.", "description": "好的。" },
+        {
+          "sentence": "A: How about the pen?",
+          "description": "这支笔多少钱？"
+        },
+        { "sentence": "B: It's two yuan.", "description": "两元。" },
+        { "sentence": "A: I'll take two.", "description": "我要买两个。" },
+        {
+          "sentence": "B: Ten and two make twelve.",
+          "description": "10 + 2 = 12元。"
+        },
+        {
+          "sentence": "A: Twelve yuan. Here you are.",
+          "description": "12元。给你。"
+        },
+        { "sentence": "B: Thank you!", "description": "谢谢！" }
+      ]
+    }
+  ]
+}
